@@ -40,6 +40,7 @@
             <div class="content">
                 <div class="title">CS411 Orange Team</div>
                 <div class="title">ResearchLink</div>
+                <div class="title">DEV</div>
             </div>
         </div>
     </body>
