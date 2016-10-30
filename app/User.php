@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use View;
+
 class User extends Authenticatable
 {
     /**
@@ -23,4 +28,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function($model)
+        {
+            $profile = new Profile;
+            $profile->user_id = $model->id;
+            $profile->save();
+        });
+    }
 }
