@@ -59,6 +59,16 @@ class AuthController extends Controller
             'user_type.required' => 'User type is required'
         ]);
     }
+
+    protected function validatorLogin(array $data)
+    {
+        return Validator::make($data, [
+            
+            'email' => 'required|email',
+            'password' => 'required',
+        
+        ]);
+    }
     /**
      * Create a new user instance after a valid registration.
      *
@@ -79,10 +89,13 @@ class AuthController extends Controller
         ]);
         
         $userData = array('first_name' => $data['first_name'], 'email' => $data['email'], 'confirmation_code' => $confirmation_code );
-        Mail::send('auth.emails.verify', ['userData' => $userData], function ($message) use ($userData) {
-            $message->to($userData['email'], $userData['first_name'])
-               ->subject('Verify your email address');
-        });
+        
+        //Create register email
+        // Mail::send('auth.emails.verify', ['userData' => $userData], function ($message) use ($userData) {
+        //     $message->to($userData['email'], $userData['first_name'])
+        //        ->subject('Verify your email address');
+        // });
+        
         unset( $userData );
     }
     /**
@@ -129,15 +142,16 @@ class AuthController extends Controller
         $user->confirmation_code = null;
         //Create the welcome notification
         
-        $notification = new Notifications;
-        $notification->user_id = $user->id;
-        $notification->type_of_notification = 'welcome';
-        $notification->title_html = 'Welcome';
-        $notification->body_html = 'Welcome to ResearchLink! Remember to complete your profile to get linked to new research opportunities. Thank you for signing up and good luck!';
-        $notification->is_read = 0;
-        $notification->save();
-        $user->save();
-        Session::flash('message', 'Thank you for verifying your account.'); 
+        // $notification = new Notifications;
+        // $notification->user_id = $user->id;
+        // $notification->type_of_notification = 'welcome';
+        // $notification->title_html = 'Welcome';
+        // $notification->body_html = 'Welcome to ResearchLink! Remember to complete your profile to get linked to new research opportunities. Thank you for signing up and good luck!';
+        // $notification->is_read = 0;
+        // $notification->save();
+        // $user->save();
+        // Session::flash('message', 'Thank you for verifying your account.'); 
+
         return Redirect::to('login');
     }
      /**
@@ -148,13 +162,21 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        
+        $validator = $this->validator($request->all());
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+            
         $user = User::whereEmail($request->email)->first();
         if($user->confirmed == 0){
             Session::flash('message', 'Please verify your account before logging in'); 
-            return Redirect::to('login')
-                            ->withInput();
+            return Redirect::to('login')->withInput();
         }
-        $this->validateLogin($request);
+        
+        
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.

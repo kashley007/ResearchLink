@@ -1,3 +1,68 @@
+/*** NavBar ***/
+
+.navbar{
+  background: #e7e7e7;
+  margin-bottom: 0;
+}
+.navbar-default .navbar-brand {
+  color: #7E96A0;
+  font-size: 26px;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #7E96A0;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
+  color: #003057;
+}
+#brandLink {
+  padding-left: 85px;
+}
+/**************************/
+
+/*** Landing Page Body ***/
+html, body, .solidBack {
+    height: 100%;
+    min-height: 100%;
+}
+.panel-default>.panel-heading {
+  background: #fff;
+  border: none;
+  min-height: 40px;
+}
+.panel-default>.panel-body {
+  display: none;
+}
+
+.guestPass {
+  margin-top: 150px;
+  margin-bottom: 60px
+}
+#Logo{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.stripedBack {
+ background-image: -webkit-linear-gradient(bottom, #003057, #003057 49%, #55c5e9 49%);
+ background-image: -o-linear-gradient(bottom, #003057, #003057 49%, #55c5e9 49%);
+ background-image: linear-gradient(to top, #003057, #003057 49%, #55c5e9 49%);
+ height: 542px;
+}
+.solidBack {
+  background: #003057;
+}
+footer {
+  min-height: 80px;
+  background: #00223d;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+} 
+
+/*** Register Page ***/
+
+/*** Login ***/
+
 /*** Select User Type ***/
 .userType {
     padding: 40px;
