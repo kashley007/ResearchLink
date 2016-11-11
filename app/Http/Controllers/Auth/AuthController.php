@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Lang;
 class AuthController extends Controller
 {
     /*
@@ -154,7 +155,74 @@ class AuthController extends Controller
 
         return Redirect::to('login');
     }
+
+    protected function getCredentials(Request $request){
+        
+        return [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ];
+    }
+
      /**
+     * Get the failed login response instance.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->loginUsername(), 'remember'))
+            ->withErrors([
+                $this->loginUsername() => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+    /**
+     * Get the failed login message.
+     *
+     * @return string
+     */
+    protected function getFailedLoginMessage()
+    {
+        return Lang::has('auth.failed')
+                ? Lang::get('auth.failed')
+                : 'These credentials do not match our records.';
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  bool  $throttles
+     * @return \Illuminate\Http\Response
+     */
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated')) {
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+    }
+    
+    protected function authenticated(Request $request, User $user){
+
+        if($user->confirmed === 0){
+            Auth::logout();
+            Session::flash('message', 'Please verify your account before logging in'); 
+            return Redirect::to('login')
+                            ->withInput();
+        }else{
+            return redirect()->intended($this->redirectPath());
+        }
+    }
+
+    /**
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -163,19 +231,14 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         
-        $validator = $this->validator($request->all());
+        $validator = $this->validatorLogin($request->all());
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
             );
         }
             
-        $user = User::whereEmail($request->email)->first();
-        if($user->confirmed == 0){
-            Session::flash('message', 'Please verify your account before logging in'); 
-            return Redirect::to('login')->withInput();
-        }
-        
+       
         
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -186,15 +249,20 @@ class AuthController extends Controller
             return $this->sendLockoutResponse($request);
         }
         $credentials = $this->getCredentials($request);
+
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
+            
             return $this->handleUserWasAuthenticated($request, $throttles);
+        }else{
+            return $this->sendFailedLoginResponse($request);
         }
+        
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         if ($throttles && ! $lockedOut) {
             $this->incrementLoginAttempts($request);
         }
-        return $this->sendFailedLoginResponse($request);
+
     }
 }
