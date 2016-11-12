@@ -146,6 +146,7 @@ return [
         Illuminate\Session\SessionServiceProvider::class,
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
         /*

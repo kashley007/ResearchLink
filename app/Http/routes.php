@@ -31,3 +31,13 @@ Route::get('logout', 'Auth\AuthController@logout');
 Route::get('usertype', 'Auth\AuthController@userType');
 Route::get('register', 'Auth\AuthController@showRegistrationForm');
 Route::post('register', 'Auth\AuthController@register');
+
+//Verify User Route
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'Auth\AuthController@confirm'
+]);
+
+//Password Reset Routes
+Route::get('profile/resetPassword', 'ProfileController@editPassword');
+Route::post('profile/resetPassword', 'ProfileController@resetPassword');

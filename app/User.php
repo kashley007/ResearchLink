@@ -11,6 +11,7 @@ use View;
 
 class User extends Authenticatable
 {
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -33,6 +34,7 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Profile');
     }
+
 
     public static function boot()
     {
