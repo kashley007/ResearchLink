@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
+        
     }
 
     /**
@@ -58,4 +59,5 @@ class RouteServiceProvider extends ServiceProvider
             require app_path('Http/routes.php');
         });
     }
+
 }

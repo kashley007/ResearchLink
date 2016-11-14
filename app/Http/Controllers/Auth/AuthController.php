@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use Mail;
-use App\Notifications;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\profileHelpers;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Lang;
+use App\Notifications\VerifyEmail;
+use App\Notifications\Welcome;
 
 
 class AuthController extends Controller
@@ -94,12 +95,12 @@ class AuthController extends Controller
         $userData = array('first_name' => $data['first_name'], 'email' => $data['email'], 'confirmation_code' => $confirmation_code );
         
         //Create register email
-        Mail::send('auth.emails.verify', ['userData' => $userData], function ($message) use ($userData) {
-            $message->to($userData['email'], $userData['first_name'])
-               ->subject('Verify your email address');
-        });
+        // Mail::send('auth.emails.verify', ['userData' => $userData], function ($message) use ($userData) {
+        //     $message->to($userData['email'], $userData['first_name'])
+        //        ->subject('Verify your email address');
+        // });
 
-        
+        VerifyEmail::toMail($userData);
         unset( $userData );
     }
     /**
@@ -147,13 +148,7 @@ class AuthController extends Controller
         $user->confirmation_code = null;
         //Create the welcome notification
         
-        $notification = new Notifications;
-        $notification->user_id = $user->id;
-        $notification->type_of_notification = 'welcome';
-        $notification->title_html = 'Welcome';
-        $notification->body_html = 'Welcome to ResearchLink! Remember to complete your profile to get linked to new research opportunities. Thank you for signing up and good luck!';
-        $notification->is_read = 0;
-        $notification->save();
+        Welcome::toDatabase($user);
          
         $user->save();
         Session::flash('message', 'Thank you for verifying your account.'); 

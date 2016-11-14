@@ -1,7 +1,7 @@
 <?php
 namespace App;
 use Illuminate\Database\Eloquent\Model;
-class Notifications extends Model
+class Notification_Model extends Model
 {
     protected $table = 'notifications';
     protected $primaryKey = 'id';

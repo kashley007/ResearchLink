@@ -7,11 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
+
 use View;
 
 class User extends Authenticatable
 {
     
+
     /**
      * The attributes that are mass assignable.
      *
@@ -34,7 +37,6 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Profile');
     }
-
 
     public static function boot()
     {
