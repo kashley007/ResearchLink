@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('user_type') ? ' has-error' : '' }}">
                                     <label for="user_type" class="col-md-4 control-label">User Type:</label>
-                                    <div class="col-md-6" id="userClick">
+                                    <div id="userClick">
                                         <ul>
                                             <li>  
                                                 <input id="user_type1" type="radio" class="form-control" name="user_type" value="Student">

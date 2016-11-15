@@ -41,3 +41,12 @@ Route::get('register/verify/{confirmationCode}', [
 //Password Reset Routes
 Route::get('profile/resetPassword', 'ProfileController@editPassword');
 Route::post('profile/resetPassword', 'ProfileController@resetPassword');
+
+//Student Profile Routes
+Route::get('profile/student', 'ProfileController@index');
+Route::get('profile/student/edit', 'ProfileController@editStudentProfile');
+Route::post('profile/student/edit','ProfileController@updateStudentProfile');
+//Faculty Profile Routes
+Route::get('profile/faculty', 'Profile@index');
+Route::get('profile/faculty/edit', 'ProfileController@editFacultyProfile');
+Route::post('profile/faculty/edit','ProfileController@updateFacultyProfile');

@@ -37,6 +37,26 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Profile');
     }
+    
+    public function coursesTaken()
+    {
+        return $this->hasMany('App\Courses_Taken');
+    }
+    
+    public function coursesTaught()
+    {
+        return $this->hasMany('App\Courses_Taught');
+    }
+    
+    public function interestAreas()
+    {
+        return $this->hasMany('App\Interest_Areas');
+    }
+    
+    public function notifications()
+    {
+        return $this->hasMany('App\Notifications');
+    }
 
     public static function boot()
     {
