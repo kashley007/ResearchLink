@@ -1,0 +1,328 @@
+@extends('layouts.app_interior')
+@section('main_container')
+   
+<!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Edit Profile</h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                     <!-- Smart Wizard -->
+                  <div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">1</span>
+                          <span class="step_descr">
+                                            Step 1<br />
+                                            <small>Personal</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-2">
+                          <span class="step_no">2</span>
+                          <span class="step_descr">
+                                            Step 2<br />
+                                            <small>Education</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-3">
+                          <span class="step_no">3</span>
+                          <span class="step_descr">
+                                            Step 3<br />
+                                            <small>Research Interests</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-4">
+                          <span class="step_no">4</span>
+                          <span class="step_descr">
+                            Step 4<br />
+                            <small>Photo</small>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                    <div id="step-1">
+                      <form class="form-horizontal form-label-left">
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                          <label for="first_name" class="control-label col-md-3 col-sm-3 col-xs-12">First name:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="first_name" class="form-control col-md-7 col-xs-12" type="text" name="first_name" value="{{ Auth::user()->first_name }}">
+                            @if ($errors->has('first_name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                              @endif
+                          </div>
+                        </div> 
+                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                          <label for="last_name" class="control-label col-md-3 col-sm-3 col-xs-12">Last name:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="last_name" type="text" class="form-control col-md-7 col-xs-12" name="last_name"  value="{{ Auth::user()->last_name }}">
+                            @if ($errors->has('last_name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
+                          </div>
+                        </div>
+                          <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="control-label col-md-3 col-sm-3 col-xs-12">Address:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="address" class="form-control col-md-7 col-xs-12" type="text" name="address" value="{{ Auth::user()->profile->address }}">
+                              @if ($errors->has('address'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </span>
+                            @endif
+                            </div>
+                          </div>
+                          <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="city" class="control-label col-md-3 col-sm-3 col-xs-12">City:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="city" class="form-control col-md-7 col-xs-12" type="text" name="city" value="{{ Auth::user()->profile->city }}">
+                              @if ($errors->has('city'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('city') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            @include('includes/states')
+                          </div>
+                          <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
+                            <label for="zipcode" class="control-label col-md-3 col-sm-3 col-xs-12">Zip:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="zipcode" class="form-control col-md-7 col-xs-12" name="zipcode" type="text" value="{{ Auth::user()->profile->zipcode }}">
+                              @if ($errors->has('zipcode'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('zipcode') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                          </div>
+                          <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="email" class="form-control col-md-7 col-xs-12" name="email" type="text" value="{{ Auth::user()->email }}">
+                              @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                          </div>
+                          <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="control-label col-md-3 col-sm-3 col-xs-12">Phone:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input id="phone" class="form-control col-md-7 col-xs-12" name="phone" type="text" value="{{ Auth::user()->profile->phone }}">
+                              @if ($errors->has('phone'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                          </div>
+                      </form>
+                    </div>
+                    <div id="step-2">
+                      <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                          <label for="major" class="control-label col-md-3 col-sm-3 col-xs-12">Major:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="ui-select">
+                              <select id="major" class="form-control" name="major" value="">
+                                @if(Auth::user()->profile->major != null)
+                                  <option style="display:none;" value="{{ Auth::user()->profile->major }}">{{ Auth::user()->profile->major }}</option>
+                                  <option value=""></option>
+                                @else
+                                  <option value="">select...</option>
+                                @endif
+                                @foreach($subjects as $subject)
+                                  <option value="{{ $subject->name }}">{{ $subject->name }}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('gpa') ? ' has-error' : '' }}">
+                          <label for="gpa" class="control-label col-md-3 col-sm-3 col-xs-12">GPA:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="gpa" class="form-control col-md-7 col-xs-12" name="gpa" type="text" value="{{ Auth::user()->profile->gpa }}">
+                            @if ($errors->has('gpa'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('gpa') }}</strong>
+                              </span>
+                            @endif
+                          </div>
+                        </div>
+          
+                        <div class="form-group">
+                          <label for="grade_level" class="control-label col-md-3 col-sm-3 col-xs-12">Grade Level:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="ui-select">
+                              <select id="grade_level" class="form-control col-md-7 col-xs-12" name="grade_level" value="">
+                                @if(Auth::user()->profile->grade_level)
+                                  <option style="display:none;" value="{{ Auth::user()->profile->grade_level }}">{{ Auth::user()->profile->grade_level }}</option>
+                                  <option value=""></option>
+                                @else
+                                  <option value="">select...</option>
+                                @endif
+                                <option value="Freshman">Freshman</option>
+                                <option value="Sophomore">Sophomore</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Senior">Senior</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      
+                        <div class="form-group">
+                          <label for="courses_taken" class="control-label col-md-3 col-sm-3 col-xs-12">Courses Taken:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="ui-select">
+                              <select multiple id="courses_taken" class="form-control col-md-7 col-xs-12" name="courses_taken[]" value="">
+                                @if(Auth::user()->profile->courses_taken)
+                                  <option value="{{ Auth::user()->profile->courses_taken }}">{{ Auth::user()->profile->courses_taken }}</option>
+                                @endif
+                                @if($courses != 0)
+                                  @foreach($courses as $course)
+                                    <?php $matchid = 0; ?>
+                                    @foreach($coursesTaken as $courseTaken)
+                                      @if($course->idcourses == $courseTaken->course_id)
+                                        <?php $matchid = $course->idcourses;?>
+                                      @endif
+                                    @endforeach
+                                    @if($course->idcourses == $matchid)
+                                      <option value="{{ $course->idcourses }}" selected>{{ $course->course_number }}&nbsp&nbsp&nbsp&nbsp&nbsp{{ $course->name }}</option>
+                                    @else
+                                      <option value="{{ $course->idcourses }}">{{ $course->course_number }}&nbsp&nbsp&nbsp&nbsp&nbsp{{ $course->name }}</option>
+                                    @endif
+                                  @endforeach
+                                @else 
+                                  <option value="">Please choose a major...</option>
+                                @endif
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="distance_learning" class="control-label col-md-3 col-sm-3 col-xs-12">Distance Learning:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            
+                            @if(Auth::user()->profile->distance_learning == 1)
+                              <div class="">
+                                <label>
+                                  <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1" checked/>
+                                </label>
+                              </div>
+                            @else
+                              <div class="">
+                                <label>
+                                  <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="0"/>
+                                </label>
+                              </div>
+                            @endif
+                          </div>
+                        </div> 
+                      </form>
+                    </div>
+                    <div id="step-3">
+                      <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                          <label for="interest_areas" class="control-label col-md-3 col-sm-3 col-xs-12">Interests Areas:</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="ui-select">
+                              <select multiple id="interest_areas" class="form-control col-md-7 col-xs-12" name="interest_areas[]" value="">
+                                @if(Auth::user()->profile->interest_areas)
+                                  <option value="{{ Auth::user()->profile->interest_areas }}">{{ Auth::user()->profile->interest_areas }}</option>
+                                @endif
+                                @if($categories != 0)
+                                  @foreach($categories as $category)
+                                    <?php $matchid = 0; ?>
+                                    @foreach($interestAreas as $interestArea)
+                                      @if($category->id == $interestArea->category_id)
+                                        <?php $matchid = $category->id;?>
+                                      @endif
+                                    @endforeach
+                                    @if($category->id == $matchid)
+                                      <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
+                                  @endforeach
+                                @else 
+                                  <option value="">Please choose a major...</option>
+                                @endif
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div id="step-4">
+                      
+                    </div>
+                  </div>
+                  <!-- End SmartWizard Content -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="custom_notifications" class="custom-notifications dsp_none">
+          <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+          </ul>
+          <div class="clearfix"></div>
+          <div id="notif-group" class="tabbed_notifications"></div>
+        </div>
+
+    <!-- /page content -->
+    
+@endsection

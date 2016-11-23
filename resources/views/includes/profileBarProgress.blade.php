@@ -1,14 +1,21 @@
 <div class="progress">
-	<div id="ab" class="progress-bar progress-bar-success" role="progressbar" style="width:{{ $about }}%">
-		Personal {{ $about * 2 }}%
-	</div>
-	@if(Auth::user()->profile->user_type == "Student")
-		<div id="edu" class="progress-bar progress-bar-warning" role="progressbar" style="width:{{ $education }}%">
-			Education {{ $education * 2 }}%
-		</div>
-	@else
-		<div id="pro" class="progress-bar progress-bar-warning" role="progressbar" style="width:{{ $professional }}%">
-			Professional {{ $professional * 2 }}%
-		</div>
-	@endif 
+	
+	<div class="progress-bar progress-bar-success" id="ab" data-transitiongoal="{{ $about }}%">
+    	<span >Personal {{ $about * 2 }}%</span>
+  	</div>
+  	@if(Auth::user()->profile->user_type == "Student")
+	  	@if($education == 0)
+		  	<div class="progress-bar progress-bar-warning" id="edu" data-transitiongoal="10%">
+		    	<span >Education {{ $education * 2 }}%</span>
+		  	</div>
+	  	@else
+	  		<div class="progress-bar progress-bar-warning" id="edu" data-transitiongoal="{{ $education }}%">
+		    	<span >Education {{ $education * 2 }}%</span>
+		  	</div>
+	  	@endif
+  	@else
+  		<div class="progress-bar progress-bar-warning" id="edu" data-transitiongoal="{{$professional }}%">
+	    	<span >Professional {{ $professional * 2 }}%%</span>
+	  	</div>
+  	@endif
 </div>

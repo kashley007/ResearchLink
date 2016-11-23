@@ -30,6 +30,9 @@
         <!-- Custom Theme Style -->
         <link href="{{ asset("css/interiortemplate.css") }}" rel="stylesheet">
         <link href="{{ asset("css/researchlink.css") }}" rel="stylesheet">
+        <!-- Switchery -->
+        <link href="{{ asset("vendors/switchery/dist/switchery.min.css") }}" rel="stylesheet">
+
 
         @stack('stylesheets')
 
@@ -50,6 +53,8 @@
 
         <!-- jQuery -->
         <script src="{{ asset("vendors/jquery/dist/jquery.min.js")}}"></script>
+        <!-- jQuery Smart Wizard -->
+        <script src="{{ asset("vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js")}}"></script>
         <!-- Bootstrap -->
         <script src="{{ asset("vendors/bootstrap/dist/js/bootstrap.min.js")}}"></script>
         <!-- FastClick -->
@@ -85,12 +90,13 @@
         <!-- bootstrap-daterangepicker -->
         <script src="{{ asset("vendors/moment/min/moment.min.js")}}"></script>
         <script src="{{ asset("vendors/bootstrap-daterangepicker/daterangepicker.js")}}"></script>
+        <!-- Switchery -->
+        <script src="{{ asset("vendors/switchery/dist/switchery.min.js")}}"></script>
         <!-- Custom Theme Scripts -->
         <script src="{{ asset("js/custom.js") }}"></script>
         <!-- Select Multiple in box w/o using ctrl -->
         <script src="{{ asset("js/multiSelect.js") }}"></script>
-        <!-- Profile Progress Bar -->
-        <script src="{{ asset("js/barProgress.js") }}"></script>
+        
         
 
         @stack('scripts')
@@ -106,6 +112,16 @@
             }else{
                 $('.main_container').css("display", "block");
             }
+
+            $('#wizard').smartWizard();
+
+            $('#wizard_verticle').smartWizard({
+              transitionEffect: 'slide'
+            });
+
+            $('.buttonNext').addClass('btn btn-success');
+            $('.buttonPrevious').addClass('btn btn-primary');
+            $('.buttonFinish').addClass('btn btn-default');
         });
     </script>
     </body>

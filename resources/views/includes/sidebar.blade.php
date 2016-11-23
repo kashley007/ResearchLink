@@ -29,7 +29,7 @@
                     <li><a><i class="fa fa-user"></i> Profile <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ URL::to('/profile/student') }}">View Profile</a></li>
-                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="{{ URL::to('/profile/student/edit') }}">Edit Profile</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>
