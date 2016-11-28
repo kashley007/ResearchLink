@@ -107,7 +107,7 @@
                                   <h4><span class="profile_label">Zip:</span> {{ Auth::user()->profile->zipcode }}</h4>
                                 </div>
                               </div>
-                              @if(count($categories) != 0)
+                              @if(count($interestAreas) != 0)
                                 <h4><span class="profile_label">Research Interests:</span></h4>
                                 <table class="table table-striped">
                                   <tbody>
@@ -137,7 +137,7 @@
                                     <h4><span class="profile_label">Distance Learning:</span> No</h4>
                                   @endif
                                   <h4><span class="profile_label">GPA:</span> {{Auth::user()->profile->gpa }}</h4>
-                                  @if(count($courses) != 0)
+                                  @if(count($coursesTaken) != 0)
                                     <h4><span class="profile_label">Completed Courses:</span></h4>
                                     <table class="table table-striped">
                                       <thead>
