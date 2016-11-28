@@ -424,7 +424,7 @@ body .container.body .right_col {
 
 body {
   color: #73879C;
-  background: #fff;
+  background:  #00223d;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -2177,11 +2177,11 @@ a.btn-success, a.btn-primary, a.btn-warning, a.btn-danger {
   color: #fff; }
 
 .btn-success {
-  background: #26B99A;
+  background: #00223d;
   border: 1px solid #169F85; }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-  background: #169F85; }
+  background:  #005091; }
 
 .btn-dark {
   color: #E9EDEF;

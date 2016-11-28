@@ -42,7 +42,13 @@
         <div class="container body">
             <div class="main_container">
 
-                @include('includes/sidebar')
+                @if(Auth::user()->profile->user_type == 'Student')
+                    @include('includes/studentsidebar')
+                @elseif(Auth::user()->profile->user_type == 'Faculty')
+                    @include('includes/facultysidebar')
+                @else
+                    @include('includes/adminsidebar')
+                @endif
 
                 @include('includes/topbar')
 
@@ -111,17 +117,19 @@
     
             }else{
                 $('.main_container').css("display", "block");
+                $('.x_content').fadeIn(1100).delay(2000);
+                
+                var wide = $('.avatar-view').width() - 26;
+                $('#image_name').width(wide);
+                
+                window.addEventListener('resize', function(event){
+                    var wide = $('.avatar-view').width() - 26;
+                    $('#image_name').width(wide);
+                });
+                
             }
 
-            $('#wizard').smartWizard();
-
-            $('#wizard_verticle').smartWizard({
-              transitionEffect: 'slide'
-            });
-
-            $('.buttonNext').addClass('btn btn-success');
-            $('.buttonPrevious').addClass('btn btn-primary');
-            $('.buttonFinish').addClass('btn btn-default');
+            
         });
     </script>
     </body>

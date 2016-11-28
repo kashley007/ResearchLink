@@ -329,7 +329,7 @@ function processProfileImage($request, $profile){
             // check to see if profile has image_name then delete that file in directory
             if(!is_null($original = $profile->image_name)){
                 $original = $profile->image_name;
-                File::Delete(public_path().'/images/profile/'.$original);
+                File::Delete(public_path().'/images/Profile_Images/'.$original);
                 $profile->image_name = null;
             }
             // get image and ext. from file 
@@ -338,13 +338,13 @@ function processProfileImage($request, $profile){
             
             
             // resize/upload the image in the profile photo directory
-            $path = public_path('/images/profile/' . $filename);
+            $path = public_path('/images/Profile_Images/' . $filename);
             $width = Image::make($image->getRealPath())->width();
             $height = Image::make($image->getRealPath())->height();
             if($height == $width){
-                Image::make($image->getRealPath())->resize(600, 600)->save($path);
+                Image::make($image->getRealPath())->resize(300, 300)->save($path);
             }else {
-                Image::make($image->getRealPath())->crop(800, 800)->save($path);
+                Image::make($image->getRealPath())->crop(400, 400)->save($path);
                 
             }
     

@@ -9,7 +9,11 @@
         <!-- menu profile quick info -->
         <div class="profile">
             <div class="profile_pic">
-                <img src="{{ URL::asset('/images/profile_placeholder.jpg') }}" alt="Avatar of {{ Auth::user()->name }}" class="img-circle profile_img">
+                @if( Auth::user()->profile->image_name )
+                    <img src="{{URL::asset('/images/Profile_Images/')}}/{{Auth::user()->profile->image_name }}" alt="Avatar of {{ Auth::user()->name }}" class="img-circle profile_img">
+                @else
+                    <img src="{{ asset('/images/Profile_Images/profile_placeholder.jpg')}}" alt="Avatar of {{ Auth::user()->name }}" class="img-circle profile_img">
+                @endif
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>

@@ -73,6 +73,7 @@ class ProfileController extends Controller
     // post data from editProfile form
     public function updateStudentProfile(Request $request) {
         // Validate profile edit form
+      
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|alpha',
             'last_name' => 'required|alpha',

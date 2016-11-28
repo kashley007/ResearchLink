@@ -9,15 +9,24 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ URL::asset('/images/profile_placeholder.jpg') }}" alt="Avatar of {{ Auth::user()->first_name }}">
+                        @if( Auth::user()->profile->image_name )
+                            <img src="{{URL::asset('/images/Profile_Images/')}}/{{Auth::user()->profile->image_name }}" alt="Avatar of {{ Auth::user()->first_name }}">
+                        @else   
+                            <img src="{{ URL::asset('/images/Profile_Images/profile_placeholder.jpg') }}" alt="Avatar of {{ Auth::user()->first_name }}">
+                        @endif
                         {{ Auth::user()->name }}
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;"> Profile</a></li>
                         <li>
                             <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
+                                <span class="badge bg-red pull-right"></span>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span class="badge bg-red pull-right"></span>
                                 <span>Settings</span>
                             </a>
                         </li>

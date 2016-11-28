@@ -15,8 +15,26 @@
 #pro {
     background-color: #95A0A9;
 }
-
+/*Profile Design*/
+#updateProfile, #resetbtn, #sendLink, #resetEmail, #loginbtn, #registerbtn, #edit_profile {
+    color: #FFF;
+    background: #002543;
+    border-color: #002543;
+}
+#updateProfile:hover, #edit_profile:hover {
+    background: #005091;
+    border-color: #005091;
+}
+#resetpass {
+    margin-top: 110px;
+}
 .profile_label {
     font-weight: bold;
     padding-right: 5px;
+}
+.x_content {
+	display: none;
+}
+#upload_image {
+    margin-top: 30px;
 }

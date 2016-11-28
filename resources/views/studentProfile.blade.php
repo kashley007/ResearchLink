@@ -51,12 +51,19 @@
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="{{ asset('/images/profile_placeholder.jpg')}}" alt="Avatar" title="Change the avatar">
+                          @if( Auth::user()->profile->image_name )
+                            <img src="{{URL::asset('/images/Profile_Images/')}}/{{Auth::user()->profile->image_name }}" class="img-responsive avatar-view" alt="avatar">
+                          @else
+                            <img class="img-responsive avatar-view" src="{{ asset('/images/Profile_Images/profile_placeholder.jpg')}}" alt="Avatar" title="Change the avatar">
+                          @endif
                         </div>
                       </div>
                       <h3>{{Auth::user()->first_name }} {{Auth::user()->last_name }}</h3>
 
                       <ul class="list-unstyled user_data">
+                        <li>
+                          <i class="fa fa-graduation-cap"></i> {{ Auth::user()->profile->grade_level }}
+                        </li>
                         @if(Auth::user()->profile->city && Auth::user()->profile->state)
                           <li><i class="fa fa-map-marker user-profile-icon"></i> {{ Auth::user()->profile->city}}, {{Auth::user()->profile->state}}
                           </li>
@@ -68,48 +75,15 @@
                           </li>
                         @endif
 
-                        <li>
-                          <i class="fa fa-briefcase user-profile-icon"></i> {{ Auth::user()->profile->grade_level }}
-                        </li>
-
                         <li class="m-top-xs">
                           <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+                          <a href="" target="_blank"></a>
                         </li>
                       </ul>
 
-                      <a class="btn btn-success" href="{{ URL::to('/profile/student/edit') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                      <a id="edit_profile" class="btn btn-success" href="{{ URL::to('/profile/student/edit') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                       <br />
 
-                      <!-- start skills -->
-                      <h4>Skills</h4>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <p>Web Applications</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Website Design</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Automation & Testing</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>UI / UX</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                      </ul>
-                      <!-- end of skills -->
 
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -119,57 +93,76 @@
                           </li>
                           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Education</a>
                           </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Interests</a>
-                          </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                            <!-- start Personal -->
-                            <div class="row">  
-                              <div class="col-md-6">
-                                <h2><span class="profile_label">Email:</span> {{ Auth::user()->email }}</h2>
-                                <h2><span class="profile_label">Phone:</span> {{ Auth::user()->profile->phone }}</h2>
-                                <h2><span class="profile_label">Address:</span> {{ Auth::user()->profile->address }}</h2>
-                                <h2><span class="profile_label">City:</span> {{ Auth::user()->profile->city }}</h2>
-                                <h2><span class="profile_label">State:</span> {{ Auth::user()->profile->state }}</h2>
-                                <h2><span class="profile_label">Zip:</span> {{ Auth::user()->profile->zipcode }}</h2>
+                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                              <!-- start Personal -->
+                              <div class="row">  
+                                <div class="col-md-6">
+                                  <h4><span class="profile_label">Email:</span> {{ Auth::user()->email }}</h4>
+                                  <h4><span class="profile_label">Phone:</span> {{ Auth::user()->profile->phone }}</h4>
+                                  <h4><span class="profile_label">Address:</span> {{ Auth::user()->profile->address }}</h4>
+                                  <h4><span class="profile_label">City:</span> {{ Auth::user()->profile->city }}</h4>
+                                  <h4><span class="profile_label">State:</span> {{ Auth::user()->profile->state }}</h4>
+                                  <h4><span class="profile_label">Zip:</span> {{ Auth::user()->profile->zipcode }}</h4>
+                                </div>
                               </div>
-                            </div>
-                            <!-- end Personal -->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                            <!-- start education -->
-                            <div class="row">  
-                              <div class="col-md-6">
-                                <h2><span class="profile_label">Grade Level:</span> {{Auth::user()->profile->grade_level }}</h2>
-                                <h2><span class="profile_label">GPA:</span> {{Auth::user()->profile->gpa }}</h2>
-                                <h2><span class="profile_label">Major:</span> {{Auth::user()->profile->major }}</h2>
-                                @if(Auth::user()->profile->distance_learning == 1)
-                                  <h2><span class="profile_label">Distance Learning:</span> Yes</h2>
-                                @elseif(Auth::user()->profile->distance_learning == 0)
-                                  <h2><span class="profile_label">Distance Learning:</span> No</h2>
-                                @endif
-                              </div>
-                            </div>
-                            <!-- end education -->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                            <div class="row">  
-                              <div class="col-md-6">
-                                <h2><span class="profile_label">Interest Areas:</span></h2>
-                                <p>
-                                  @if($categories != 0)
+                              @if(count($categories) != 0)
+                                <h4><span class="profile_label">Research Interests:</span></h4>
+                                <table class="table table-striped">
+                                  <tbody>
                                     @foreach($categories as $category)
-                                      @foreach($interestAreas as $interestArea)
-                                        @if($category->id == $interestArea->category_id)
-                                          <h5>{{ $category->name }}</h5>
-                                        @endif
-                                      @endforeach
+                                    @foreach($interestAreas as $interestArea)
+                                      @if($category->id == $interestArea->category_id)
+                                        <tr>
+                                          <td>{{ $category->name }}</td>
+                                        </tr>
+                                      @endif
                                     @endforeach
+                                  @endforeach
+                                  </tbody>  
+                                </table>
+                              @endif
+                              <!-- end Personal -->
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                              <!-- start education -->
+                              <div class="row">  
+                                <div class="col-md-8 col-sm-12">
+                                  <h4><span class="profile_label">Grade Level:</span> {{Auth::user()->profile->grade_level }}</h4>
+                                  <h4><span class="profile_label">Major:</span> {{Auth::user()->profile->major }}</h4>
+                                  @if(Auth::user()->profile->distance_learning == 1)
+                                    <h4><span class="profile_label">Distance Learning:</span> Yes</h4>
+                                  @elseif(Auth::user()->profile->distance_learning == 0)
+                                    <h4><span class="profile_label">Distance Learning:</span> No</h4>
                                   @endif
-                                </p>
+                                  <h4><span class="profile_label">GPA:</span> {{Auth::user()->profile->gpa }}</h4>
+                                  @if(count($courses) != 0)
+                                    <h4><span class="profile_label">Completed Courses:</span></h4>
+                                    <table class="table table-striped">
+                                      <thead>
+                                        <tr>                              
+                                          <th>Course Number</th>
+                                          <th>Course Name</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>                          
+                                        @foreach($courses as $course)
+                                          @foreach($coursesTaken as $courseTaken)
+                                            @if($course->idcourses == $courseTaken->course_id)
+                                              <tr>
+                                                <td>{{ $course->course_number }}</td>
+                                                <td>{{ $course->name }}</td>
+                                              </tr>
+                                            @endif
+                                          @endforeach
+                                        @endforeach
+                                      </tbody>
+                                    </table>
+                                  @endif
+                                </div>
                               </div>
-                            </div>
+                              <!-- end education -->
                           </div>
                         </div>
                       </div>
