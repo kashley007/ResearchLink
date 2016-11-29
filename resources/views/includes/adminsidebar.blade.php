@@ -30,24 +30,9 @@
             <div class="menu_section">
                 <ul class="nav side-menu">
                     <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Home </a>
-                    <li><a><i class="fa fa-user"></i> Profile <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{ URL::to('/profile/student') }}">View Profile</a></li>
-                            <li><a href="{{ URL::to('/profile/student/edit') }}">Edit Profile</a></li>
-                        </ul>
+                    <li><a href="{{ url('/admin/site') }}"><i class="fa fa-desktop"></i> Site Administration</a>
                     </li>
-                    <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">Search Opportunities</a></li>
-                            <li><a href="#">View Saved</a></li>
-                            <li><a href="#">My Matches</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-newspaper-o"></i> News <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">Current News</a></li>
-                            <li><a href="#">All</a></li>
-                        </ul>
+                    <li><a href="{{ url('/admin/database') }}"><i class="fa fa-database"></i>Database Administration</a>
                     </li>
                 </ul>
             </div>        

@@ -96,39 +96,40 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                              <!-- start Personal -->
-                              <div class="row">  
-                                <div class="col-md-6">
-                                  <h4><span class="profile_label">Email:</span> {{ Auth::user()->email }}</h4>
-                                  <h4><span class="profile_label">Phone:</span> {{ Auth::user()->profile->phone }}</h4>
-                                  <h4><span class="profile_label">Address:</span> {{ Auth::user()->profile->address }}</h4>
-                                  <h4><span class="profile_label">City:</span> {{ Auth::user()->profile->city }}</h4>
-                                  <h4><span class="profile_label">State:</span> {{ Auth::user()->profile->state }}</h4>
-                                  <h4><span class="profile_label">Zip:</span> {{ Auth::user()->profile->zipcode }}</h4>
-                                </div>
-                              </div>
-                              @if(count($interestAreas) != 0)
-                                <h4><span class="profile_label">Research Interests:</span></h4>
-                                <table class="table table-striped">
-                                  <tbody>
-                                    @foreach($categories as $category)
-                                    @foreach($interestAreas as $interestArea)
-                                      @if($category->id == $interestArea->category_id)
-                                        <tr>
-                                          <td>{{ $category->name }}</td>
-                                        </tr>
-                                      @endif
+                            <!-- start Personal -->
+                            <div class="row">  
+                              <div class="col-md-6 col-xs-12">
+                                <h4><span class="profile_label">Email:</span> {{ Auth::user()->email }}</h4>
+                                <h4><span class="profile_label">Phone:</span> {{ Auth::user()->profile->phone }}</h4>
+                                <h4><span class="profile_label">Address:</span> {{ Auth::user()->profile->address }}</h4>
+                                <h4><span class="profile_label">City:</span> {{ Auth::user()->profile->city }}</h4>
+                                <h4><span class="profile_label">State:</span> {{ Auth::user()->profile->state }}</h4>
+                                <h4><span class="profile_label">Zip:</span> {{ Auth::user()->profile->zipcode }}</h4>
+                                @if(count($interestAreas) != 0)
+                                  <h4><span class="profile_label">Research Interests:</span></h4>
+                                  <table class="table table-striped">
+                                    <tbody>
+                                      @foreach($categories as $category)
+                                      @foreach($interestAreas as $interestArea)
+                                        @if($category->id == $interestArea->category_id)
+                                          <tr>
+                                            <td>{{ $category->name }}</td>
+                                          </tr>
+                                        @endif
+                                      @endforeach
                                     @endforeach
-                                  @endforeach
-                                  </tbody>  
-                                </table>
-                              @endif
+                                    </tbody>  
+                                  </table>
+                                @endif
+                              </div>
+                            </div>
+                              
                               <!-- end Personal -->
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                               <!-- start education -->
                               <div class="row">  
-                                <div class="col-md-8 col-sm-12">
+                                <div class="col-md-6 col-xs-12">
                                   <h4><span class="profile_label">Grade Level:</span> {{Auth::user()->profile->grade_level }}</h4>
                                   <h4><span class="profile_label">Major:</span> {{Auth::user()->profile->major }}</h4>
                                   @if(Auth::user()->profile->distance_learning == 1)

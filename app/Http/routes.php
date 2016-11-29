@@ -47,6 +47,13 @@ Route::get('profile/student', 'ProfileController@index');
 Route::get('profile/student/edit', 'ProfileController@editStudentProfile');
 Route::post('profile/student/edit','ProfileController@updateStudentProfile');
 //Faculty Profile Routes
-Route::get('profile/faculty', 'Profile@index');
+Route::get('profile/faculty', 'ProfileController@index');
 Route::get('profile/faculty/edit', 'ProfileController@editFacultyProfile');
 Route::post('profile/faculty/edit','ProfileController@updateFacultyProfile');
+
+//Admin Routes
+Route::get('admin/database', 'AdminController@databaseAdmin');
+Route::get('admin/site', 'AdminController@siteAdmin');
+
+Route::resource('departments', 'DepartmentController');
+Route::resource('subjects', 'SubjectController');

@@ -108,29 +108,40 @@
         @stack('scripts')
         
         <script>
-        $(document).ready(function() {
+            $(document).ready(function() {
             
 
-            if(window.location.pathname == '/home') {
-            
-                $('.main_container').fadeIn(1100).delay(2000);
-    
-            }else{
-                $('.main_container').css("display", "block");
-                $('.x_content').fadeIn(1100).delay(2000);
+                if(window.location.pathname == '/home') {
                 
-                var wide = $('.avatar-view').width() - 26;
-                $('#image_name').width(wide);
-                
-                window.addEventListener('resize', function(event){
-                    var wide = $('.avatar-view').width() - 26;
+                    $('.main_container').fadeIn(1100).delay(2000);
+        
+                }else{
+                    $('.main_container').css("display", "block");
+                    $('.x_content').fadeIn(1100).delay(2000);
+                    var wide = $('#profile_image').width() - 26;
                     $('#image_name').width(wide);
+
+                    window.addEventListener('resize', function(event){
+                        var wide = $('.avatar-view').width() - 26;
+                        $('#image_name').width(wide);
+                    });
+                    
+                }
+
+              // Delete notification 
+                $('.delete').click(function(){
+                    var page = window.location.pathname;
+                    var dataId = $(this).attr('name');    
+                    $.ajax({
+                        url: page + '/' + dataId,
+                        type: "POST",
+                        data: {_method: 'delete', "_token": "{{ csrf_token() }}"},
+                        
+                    });
+                    $(this.parentNode.parentNode).fadeOut( "fast" );       
                 });
                 
-            }
-
-            
-        });
-    </script>
+            });
+        </script>
     </body>
 </html>

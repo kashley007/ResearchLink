@@ -56,9 +56,9 @@
                           <div id="crop-avatar">
                             <!-- Current avatar -->
                             @if( Auth::user()->profile->image_name )
-                              <img src="{{URL::asset('/images/Profile_Images/')}}/{{Auth::user()->profile->image_name }}" class="img-responsive avatar-view" alt="avatar">
+                              <img id="profile_image" src="{{URL::asset('/images/Profile_Images/')}}/{{Auth::user()->profile->image_name }}" class="img-responsive avatar-view" alt="avatar">
                             @else
-                              <img class="img-responsive avatar-view" src="{{ asset('/images/Profile_Images/profile_placeholder.jpg')}}" alt="Avatar" title="Change the avatar">
+                              <img id="profile_image" class="img-responsive avatar-view" src="{{ asset('/images/Profile_Images/profile_placeholder.jpg')}}" alt="Avatar" title="Change the avatar">
                             @endif
                           </div>
                         </div>
@@ -210,6 +210,26 @@
                                 </div>
                               </div>
                             </div>
+
+                            <div class="form-group">
+                              <label for="distance_learning" class="control-label col-md-3 col-sm-3 col-xs-12">Distance Learning:</label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="hidden" value="0"/>
+                                @if(Auth::user()->profile->distance_learning == 1)
+                                  <div class="">
+                                    <label>
+                                      <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1" checked/>
+                                    </label>
+                                  </div>
+                                @else
+                                  <div class="">
+                                    <label>
+                                      <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1"/>
+                                    </label>
+                                  </div>
+                                @endif
+                              </div>
+                            </div>
                           
                             <div class="form-group">
                               <label for="courses_taken" class="control-label col-md-3 col-sm-3 col-xs-12">Completed Courses:</label>
@@ -240,26 +260,7 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group">
-                              <label for="distance_learning" class="control-label col-md-3 col-sm-3 col-xs-12">Distance Learning:</label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="hidden" value="0"/>
-                                @if(Auth::user()->profile->distance_learning == 1)
-                                  <div class="">
-                                    <label>
-                                      <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1" checked/>
-                                    </label>
-                                  </div>
-                                @else
-                                  <div class="">
-                                    <label>
-                                      <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1"/>
-                                    </label>
-                                  </div>
-                                @endif
-                              </div>
-                            </div> 
-                          
+                           
                             <div class="form-group">
                               <label for="interest_areas" class="control-label col-md-3 col-sm-3 col-xs-12">Interests Areas:</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
