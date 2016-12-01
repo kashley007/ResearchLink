@@ -27,6 +27,7 @@ class Welcome extends Notification
         $notification->body_html = 'Welcome to ResearchLink! Remember to complete your profile to get linked to new research opportunities. Thank you for signing up and good luck!';
         $notification->is_read = 0;
         $notification->save();
+        
     }
 
 }

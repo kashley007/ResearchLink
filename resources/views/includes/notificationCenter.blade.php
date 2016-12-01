@@ -1,58 +1,43 @@
 <!-- Notification Center Begin -->
 <li role="presentation" class="dropdown">
+    {{csrf_field()}}
+
     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-envelope-o"></i>
-        <span class="badge bg-green">6</span>
+
+        @if(Auth::user()->notifications->where('is_read', '=', 0)->count())
+            <span class="badge bg-green">
+             {{Auth::user()->notifications->where('is_read', '=', 0)->count()}}       
+            </span>
+        @endif
     </a>
     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+        @foreach(Auth::user()->notifications as $notification)
         <li>
             <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                 <span>
-          <span>John Smith</span>
-          <span class="time">3 mins ago</span>
-        </span>
+                    <span>{{$notification->title_html}}</span>
+                    <span class="time">{{$notification->created_at->format('m-d-Y h:i:s a')}}</span>
+                </span>
                 <span class="message">
-          Film festivals used to be do-or-die moments for movie makers. They were where...
-        </span>
+                    {{$notification->body_html}}
+                </span>
             </a>
+            @if($notification->is_read == 0)                                                 
+                <div class="notification-read">
+                    <a class="markRead" name="{{$notification->id}}" href="">Mark Read</a>&nbsp&nbsp
+                    <a class="deleteNotification" href="" name="{{$notification->id}}">Delete</a>
+                </div>                                             
+            @else                                                 
+                <div id="notificationRead" class="notification-read">
+                    <span>
+                        <i class="fa fa-check" aria-hidden="true"></i>&nbspRead
+                    </span>&nbsp&nbsp
+                    <a class="deleteNotification" href="" name="{{$notification->id}}">Delete</a>
+                </div>                                             
+            @endif
         </li>
-        <li>
-            <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-          <span>John Smith</span>
-          <span class="time">3 mins ago</span>
-        </span>
-                <span class="message">
-          Film festivals used to be do-or-die moments for movie makers. They were where...
-        </span>
-            </a>
-        </li>
-        <li>
-            <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-          <span>John Smith</span>
-          <span class="time">3 mins ago</span>
-        </span>
-                <span class="message">
-          Film festivals used to be do-or-die moments for movie makers. They were where...
-        </span>
-            </a>
-        </li>
-        <li>
-            <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-          <span>John Smith</span>
-          <span class="time">3 mins ago</span>
-        </span>
-                <span class="message">
-          Film festivals used to be do-or-die moments for movie makers. They were where...
-        </span>
-            </a>
-        </li>
+        @endforeach
         <li>
             <div class="text-center">
                 <a>
@@ -61,6 +46,7 @@
                 </a>
             </div>
         </li>
+
     </ul>
 </li>
 <!-- Notification Center End -->

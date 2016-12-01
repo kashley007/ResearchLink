@@ -55,7 +55,7 @@ class User extends Authenticatable
     
     public function notifications()
     {
-        return $this->hasMany('App\Notifications');
+        return $this->hasMany('App\Notification_Model');
     }
 
     public static function boot()
