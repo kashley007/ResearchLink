@@ -17,6 +17,17 @@ use App\Subject;
 
 class SubjectController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +35,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        // get all the nerds
+        // get all the subjects
         $subjects = Subject::all();
         return view('admin/subjects')->with('subjects', $subjects);
     }
