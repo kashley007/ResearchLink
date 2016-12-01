@@ -46,6 +46,7 @@ Route::post('profile/resetPassword', 'ProfileController@resetPassword');
 Route::get('profile/student', 'ProfileController@index');
 Route::get('profile/student/edit', 'ProfileController@editStudentProfile');
 Route::post('profile/student/edit','ProfileController@updateStudentProfile');
+
 //Faculty Profile Routes
 Route::get('profile/faculty', 'ProfileController@index');
 Route::get('profile/faculty/edit', 'ProfileController@editFacultyProfile');
@@ -57,3 +58,7 @@ Route::get('admin/site', 'AdminController@siteAdmin');
 
 Route::resource('departments', 'DepartmentController');
 Route::resource('subjects', 'SubjectController');
+
+//Notification Routes
+Route::post('notification/delete/{id}', 'NotificationController@delete');
+Route::post('notification/read/{id}', 'NotificationController@markRead');

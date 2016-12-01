@@ -6,7 +6,7 @@
         <i class="fa fa-envelope-o"></i>
 
         @if(Auth::user()->notifications->where('is_read', '=', 0)->count())
-            <span class="badge bg-green">
+            <span id="notification_count" class="badge bg-green">
              {{Auth::user()->notifications->where('is_read', '=', 0)->count()}}       
             </span>
         @endif
@@ -16,7 +16,7 @@
         <li>
             <a>
                 <span>
-                    <span>{{$notification->title_html}}</span>
+                    <span class="notification-title">{{$notification->title_html}}</span>
                     <span class="time">{{$notification->created_at->format('m-d-Y h:i:s a')}}</span>
                 </span>
                 <span class="message">
@@ -25,15 +25,15 @@
             </a>
             @if($notification->is_read == 0)                                                 
                 <div class="notification-read">
-                    <a class="markRead" name="{{$notification->id}}" href="">Mark Read</a>&nbsp&nbsp
-                    <a class="deleteNotification" href="" name="{{$notification->id}}">Delete</a>
+                    <a class="markRead" name="{{$notification->id}}">Mark Read</a>&nbsp&nbsp
+                    <a class="deleteNotification" name="{{$notification->id}}">Delete</a>
                 </div>                                             
             @else                                                 
                 <div id="notificationRead" class="notification-read">
                     <span>
                         <i class="fa fa-check" aria-hidden="true"></i>&nbspRead
                     </span>&nbsp&nbsp
-                    <a class="deleteNotification" href="" name="{{$notification->id}}">Delete</a>
+                    <a class="deleteNotification" name="{{$notification->id}}">Delete</a>
                 </div>                                             
             @endif
         </li>
