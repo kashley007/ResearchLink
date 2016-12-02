@@ -169,6 +169,38 @@
                         }
                     });      
                 });
+
+                $('#department').change(function(){
+                    if($(this).val() != 0){
+                        $.get("{{ url('profile/faculty/filtercourses')}}", 
+                            { option: $(this).val() }, 
+                            function(data) {
+                                var course = $('#courses_taught');
+                                course.empty();
+                                console.log(data);
+                                $.each(data, function(index, element) {
+                                    course.append("<option value='"+ element.idcourses +"'>" + element.course_number + " " + element.name + "</option>");
+                            });
+                        });
+                        $.get("{{ url('profile/faculty/filtercategories')}}", 
+                            { option: $(this).val() }, 
+                            function(data) {
+                                var category = $('#interest_areas');
+                                category.empty();
+                                console.log(data);
+                                $.each(data, function(index, element) {
+                                    category.append("<option value='"+ element.id +"'>" + element.name + "</option>");
+                            });
+                        });
+                    }else{
+                        var course = $('#courses_taught');
+                        var category = $('#interest_areas');
+                        course.empty();
+                        category.empty();
+                        course.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                        category.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                    }
+                });
                 
             });
         </script>

@@ -1,5 +1,11 @@
 <?php
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use App\Department;
+use App\Subject;
+use App\Course;
+use App\Category;
+use Illuminate\Support\Facades\Response;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -51,6 +57,19 @@ Route::post('profile/student/edit','ProfileController@updateStudentProfile');
 Route::get('profile/faculty', 'ProfileController@index');
 Route::get('profile/faculty/edit', 'ProfileController@editFacultyProfile');
 Route::post('profile/faculty/edit','ProfileController@updateFacultyProfile');
+Route::get('profile/faculty/filtercourses', function(){
+  	$input = Input::get('option');
+  	$department = Department::where('name', '=', $input)->first();
+  	$course = Course::where('department', '=', $department->id);
+	return Response::make($course->get(['idcourses','course_number', 'name']));
+});
+Route::get('profile/faculty/filtercategories', function(){
+  	$input = Input::get('option');
+  	$department = Department::where('name', '=', $input)->first();
+  	$category = Category::where('department', '=', $department->id);
+	return Response::make($category->get(['id', 'name']));
+});
+
 
 //Admin Routes
 Route::get('admin/database', 'AdminController@databaseAdmin');

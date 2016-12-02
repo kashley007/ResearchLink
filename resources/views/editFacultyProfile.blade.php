@@ -168,7 +168,7 @@
                                   <select id="department" class="form-control" name="department" value="">
                                     @if(Auth::user()->profile->department != null)
                                       <option style="display:none;" value="{{ Auth::user()->profile->department }}">{{ Auth::user()->profile->department }}</option>
-                                      <option value=""></option>
+                                      <option value="0"></option>
                                     @else
                                       <option value="">select...</option>
                                     @endif

@@ -11,8 +11,13 @@ class Subject extends Model
     protected $fillable = ['name', 'department_id'];
     public $timestamps = false;
 
-    public function Department()
+    public function department()
     {
         return $this->belongsTo('App\Department');
+    }
+
+    public function courses()
+    {
+        return $this->hasMany('App\Course');
     }
 }

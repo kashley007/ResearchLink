@@ -5,10 +5,13 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use App\Http\Requests; 
 use App\Courses_Taken;
 use App\Interest_Areas;
+use App\Department;
+use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
@@ -194,6 +197,7 @@ class ProfileController extends Controller
         return Redirect::to('profile/faculty/edit');
         
     }
+
     // navigate to editFacultyProfile form view
     public function editFacultyProfile() {
         $departments = getDepartments();

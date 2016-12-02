@@ -62,7 +62,7 @@
 
                       <ul class="list-unstyled user_data">
                         <li>
-                          <i class="fa fa-building"></i> {{ Auth::user()->profile->grade_level }}
+                          <i class="fa fa-building"></i> {{ Auth::user()->profile->department }}
                         </li>
                         @if(Auth::user()->profile->city && Auth::user()->profile->state)
                           <li><i class="fa fa-map-marker user-profile-icon"></i> {{ Auth::user()->profile->city}}, {{Auth::user()->profile->state}}
