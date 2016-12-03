@@ -15,7 +15,7 @@
 	  	@endif
   	@else
   		<div class="progress-bar progress-bar-warning" id="edu" data-transitiongoal="{{$professional }}%">
-	    	<span >Professional {{ $professional * 2 }}%%</span>
+	    	<span >Professional {{ $professional * 2 }}%</span>
 	  	</div>
   	@endif
 </div>

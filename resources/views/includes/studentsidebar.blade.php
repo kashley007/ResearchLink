@@ -38,7 +38,7 @@
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">Search Opportunities</a></li>
+                            <li><a href="{{ URL::to('/research') }}">View Opportunities</a></li>
                             <li><a href="#">View Saved</a></li>
                             <li><a href="#">My Matches</a></li>
                         </ul>

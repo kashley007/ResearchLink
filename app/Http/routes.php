@@ -81,3 +81,9 @@ Route::resource('subjects', 'SubjectController');
 //Notification Routes
 Route::post('notification/delete/{id}', 'NotificationController@delete');
 Route::post('notification/read/{id}', 'NotificationController@markRead');
+
+//Research Routes
+Route::resource('research', 'Research_OpportunitiesController');
+//Route::post('research/save/{id}', 'Saved_OpportunitiesController@markSaved');
+//Route::get('saved/research', 'Saved_OpportunitiesController@showSaved');
+//Route::post('saved/delete/{id}', 'Saved_OpportunitiesController@deleteSaved');
