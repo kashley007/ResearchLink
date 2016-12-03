@@ -58,3 +58,28 @@ function getSavedOpportunities(){
 	}
 	return $saved;
 }
+
+// Get all Agencies
+function getAgencies(){
+	$allAgencies = DB::table('research_agencies')->get();
+	return $allAgencies;
+}
+
+// Get all Deparments
+function getAllDepartments(){
+	$allDepartments = DB::table('departments')->get();
+	return $allDepartments;
+}
+
+// Get department categories
+function getDepartmentCategories(){
+	$dept = DB::table('departments')->where('name', '=', Auth::user()->profile->department)->first();
+	$deptCategories = DB::table('categories')->where('department', '=', $dept->id)->get();
+	return $deptCategories;
+}
+
+// Get all Categories
+function getCategories(){
+	$allCategories = DB::table('categories')->get();
+	return $allCategories;
+}
