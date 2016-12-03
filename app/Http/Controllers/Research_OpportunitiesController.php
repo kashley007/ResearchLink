@@ -52,11 +52,16 @@ class Research_OpportunitiesController extends Controller
      */
     public function create()
     {
-        //getAgencies
-        //getDepartments
-        //getCategories
+        $agencies = getAgencies();
+        $departments = getAllDepartments();
 
-        return view('createResearch');
+        if(Auth::user()->profile->user_type == "Faculty"){
+            $categories = getDepartmentCategories();
+        }else{
+            $categories = getCategories();
+        }
+
+        return view('createOpportunity')->with('agencies',$agencies)->with('departments',$departments)->with('categories',$categories);
     }
 
     /**
@@ -67,7 +72,8 @@ class Research_OpportunitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        die();
     }
 
     /**
