@@ -165,7 +165,7 @@
                               <label for="major" class="control-label col-md-3 col-sm-3 col-xs-12">Major:</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="ui-select">
-                                  <select id="major" class="form-control" name="major" value="">
+                                  <select id="profile_filter" class="form-control" name="major" value="">
                                     @if(Auth::user()->profile->major != null)
                                       <option style="display:none;" value="{{ Auth::user()->profile->major }}">{{ Auth::user()->profile->major }}</option>
                                       <option value=""></option>
@@ -235,7 +235,7 @@
                               <label for="courses_taken" class="control-label col-md-3 col-sm-3 col-xs-12">Completed Courses:</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="ui-select">
-                                  <select multiple id="courses_taken" class="form-control col-md-7 col-xs-12" name="courses_taken[]" value="">
+                                  <select multiple id="courses" class="form-control col-md-7 col-xs-12" name="courses_taken[]" value="">
                                     @if(Auth::user()->profile->courses_taken)
                                       <option value="{{ Auth::user()->profile->courses_taken }}">{{ Auth::user()->profile->courses_taken }}</option>
                                     @endif

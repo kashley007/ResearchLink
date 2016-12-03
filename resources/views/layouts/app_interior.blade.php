@@ -170,19 +170,19 @@
                     });      
                 });
 
-                $('#department').change(function(){
+                $('#profile_filter').change(function(){
                     if($(this).val() != 0){
-                        $.get("{{ url('profile/faculty/filtercourses')}}", 
+                        $.get("{{ url('profile/filtercourses')}}", 
                             { option: $(this).val() }, 
                             function(data) {
-                                var course = $('#courses_taught');
+                                var course = $('#courses');
                                 course.empty();
                                 console.log(data);
                                 $.each(data, function(index, element) {
                                     course.append("<option value='"+ element.idcourses +"'>" + element.course_number + " " + element.name + "</option>");
                             });
                         });
-                        $.get("{{ url('profile/faculty/filtercategories')}}", 
+                        $.get("{{ url('profile/filtercategories')}}", 
                             { option: $(this).val() }, 
                             function(data) {
                                 var category = $('#interest_areas');
@@ -193,12 +193,18 @@
                             });
                         });
                     }else{
-                        var course = $('#courses_taught');
+                        var course = $('#courses');
                         var category = $('#interest_areas');
                         course.empty();
                         category.empty();
-                        course.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
-                        category.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                        if("{{Auth::user()->profile->user_type == 'Faculty'}}"){
+                            course.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                            category.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                        }else{
+                            course.append("<option value='"+ 0 +"'>" + "Please choose a major..." + "</option>");
+                            category.append("<option value='"+ 0 +"'>" + "Please choose a major..." + "</option>");
+                        }
+            
                     }
                 });
                 

@@ -165,7 +165,7 @@
                               <label for="department" class="control-label col-md-3 col-sm-3 col-xs-12">Department:</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="ui-select">
-                                  <select id="department" class="form-control" name="department" value="">
+                                  <select id="profile_filter" class="form-control" name="department" value="">
                                     @if(Auth::user()->profile->department != null)
                                       <option style="display:none;" value="{{ Auth::user()->profile->department }}">{{ Auth::user()->profile->department }}</option>
                                       <option value="0"></option>
@@ -184,7 +184,7 @@
                               <label for="courses_taught" class="control-label col-md-3 col-sm-3 col-xs-12">Courses Taught:</label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="ui-select">
-                                  <select multiple id="courses_taught" class="form-control col-md-7 col-xs-12" name="courses_taught[]" value="">
+                                  <select multiple id="courses" class="form-control col-md-7 col-xs-12" name="courses_taught[]" value="">
                                     @if(Auth::user()->profile->courses_taught)
                                       <option value="{{ Auth::user()->profile->courses_taught }}">{{ Auth::user()->profile->courses_taught }}</option>
                                     @endif
