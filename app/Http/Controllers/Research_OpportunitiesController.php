@@ -10,10 +10,20 @@ use Illuminate\Support\Facades\DB;
 use Validator;
 
 use App\Http\Requests;
-use App\Research_opportunity;
+use App\Research_Opportunity;
 
 class Research_OpportunitiesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,14 +64,19 @@ class Research_OpportunitiesController extends Controller
     {
         $agencies = getAgencies();
         $departments = getAllDepartments();
+        $faculty = getFaculty();
 
         if(Auth::user()->profile->user_type == "Faculty"){
-            $categories = getDepartmentCategories();
+            if(Auth::user()->profile->department){
+                $categories = getDepartmentCategories();
+            }else{
+                $categories = getCategories();
+            }
         }else{
             $categories = getCategories();
         }
 
-        return view('createOpportunity')->with('agencies',$agencies)->with('departments',$departments)->with('categories',$categories);
+        return view('createOpportunity')->with('faculty',$faculty)->with('agencies',$agencies)->with('departments',$departments)->with('categories',$categories);
     }
 
     /**
@@ -72,8 +87,60 @@ class Research_OpportunitiesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        die();
+       
+       
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|regex:/^[\pL\s\-]+$/u|unique:research_opportunities',
+            'description' => 'required|regex:/^[\pL\s\-]+$/u',
+            'app_start' => 'date|before:app_end',
+            'app_end' => 'date|after:app_start',
+            'research_start' => 'date|before:research_end',
+            'research_end' => 'date|after:research_start',
+            'type' => 'required',
+            'agency_id' => 'required',
+            'department_id' => 'required',
+            'category_id' => 'required',
+            'user_id' => 'required',
+
+        ],[
+            'title.regex' => 'Please enter a valid opportunity title',
+            'title.required' => 'Please enter a valid opportunity title',
+            'title.unique' => 'Opportunity already exists',
+            'agency_id.required' => 'The agency field is required',
+            'department_id.required' => 'The department field is required',
+            'category_id.required' => 'The category field is required',
+            'user_id.required' => 'The research lead field is required',
+        ]);
+        if ($validator->fails()) {
+            Session::flash('message', 'There was an issue with creating that opportunity'); 
+            return redirect('research/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }else {
+            
+            // store
+            $opportunity                     = new Research_Opportunity;
+            $opportunity->title               = $request->title;
+            $opportunity->description         = $request->description;
+            $opportunity->agency_id           = $request->agency_id;
+            $opportunity->user_id             = $request->user_id;
+            $opportunity->category_id         = $request->category_id;
+            $opportunity->department_id       = $request->department_id;
+            $opportunity->distance_learning   = $request->distance_learning;
+            $opportunity->type                = $request->type;
+            $opportunity->paid                = $request->paid;
+            $opportunity->payment_amount      = $request->payment_amount;
+            $opportunity->app_start           = date('Y-m-d', strtotime($request->app_start));
+            $opportunity->app_end             = date('Y-m-d', strtotime($request->app_end));
+            $opportunity->research_start      = date('Y-m-d', strtotime($request->research_start));
+            $opportunity->research_end        = date('Y-m-d', strtotime($request->research_end));
+            $opportunity->created_by          = Auth::user()->id;
+            $opportunity->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created research opportunity!');
+            return Redirect::to('research/create');
+        }
     }
 
     /**

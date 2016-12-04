@@ -5,6 +5,8 @@ use App\Department;
 use App\Subject;
 use App\Course;
 use App\Category;
+use App\Profile;
+use App\User;
 use Illuminate\Support\Facades\Response;
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +89,21 @@ Route::resource('research', 'Research_OpportunitiesController');
 //Route::post('research/save/{id}', 'Saved_OpportunitiesController@markSaved');
 //Route::get('saved/research', 'Saved_OpportunitiesController@showSaved');
 //Route::post('saved/delete/{id}', 'Saved_OpportunitiesController@deleteSaved');
+Route::get('createR/filterfaculty', function(){
+    $input = Input::get('option');
+    $matched = new \Illuminate\Database\Eloquent\Collection;
+    $department = Department::where('id', '=', $input)->first();
+    $profiles = Profile::where('department', '=', $department->name)->get();
+    foreach ($profiles as $profile) {
+      $user = $profile->user;
+      $matched->add($user);
+    }
+    
+  return Response::make($matched);
+});
+Route::get('createR/filtercategories', function(){
+    $input = Input::get('option');
+    $department = Department::where('id', '=', $input)->first();
+    $category = Category::where('department', '=', $department->id);
+  return Response::make($category->get(['id', 'name']));
+});

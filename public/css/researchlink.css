@@ -118,3 +118,15 @@
   font-weight: 700;
   padding-bottom: 1px;
 }
+/*Create Research Opportunity Form*/
+#description {
+  height: 200px;
+}
+#form_pay_amount {
+  display: none;
+}
+.input-group {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  margin-bottom: 0 !important;
+}
