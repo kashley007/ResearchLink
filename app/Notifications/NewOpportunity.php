@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use App\Notification_Model;
 use Mail;
 
-class NewOpportunity extends Notification
+class NewOpportunity extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -25,7 +25,7 @@ class NewOpportunity extends Notification
         $notification->user_id = $user->id;
         $notification->type_of_notification = 'newOpportunity';
         $notification->title_html = 'New Opportunity!';
-        $notification->body_html = 'A new opportunity,' + $notificationData->title + ',related to your interests has been created!'; //Need link to application
+        $notification->body_html = 'A new opportunity, ' . $notificationData['title'] . ', related to your interests has been created!'; //Need link to application
         $notification->is_read = 0;
         $notification->save();
     }

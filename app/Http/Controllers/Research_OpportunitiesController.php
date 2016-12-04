@@ -93,7 +93,7 @@ class Research_OpportunitiesController extends Controller
        
         $validator = Validator::make($request->all(), [
             'title' => 'required|regex:/^[\pL\s\-]+$/u|unique:research_opportunities',
-            'description' => 'required|regex:/^[\pL\s\-]+$/u',
+            'description' => 'required',
             'app_start' => 'date|before:app_end',
             'app_end' => 'date|after:app_start',
             'research_start' => 'date|before:research_end',
@@ -143,15 +143,12 @@ class Research_OpportunitiesController extends Controller
             $notificationData = array('title' => $request->title, 'description' => $request->description);
             $matchedProfiles = notificationMatcher($request->category_id);
 
-            dd($matchedProfiles);
-            die();
+            
             foreach ($matchedProfiles as $matched) {
-                NewOpportunity::toMail($matchedProfiles, $notificationData);
-                NewOpportunity::toDatabase($matchedProfiles,$notificationData);
+
+                NewOpportunity::toDatabase($matched,$notificationData);
+                NewOpportunity::toMail($matched,$notificationData);
             }
-
-
-
 
             // redirect
             Session::flash('message', 'Successfully created research opportunity!');
