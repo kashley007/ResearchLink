@@ -11,6 +11,8 @@ use Validator;
 
 use App\Http\Requests;
 use App\Research_Opportunity;
+use App\Notifications\NewOpportunity;
+
 
 class Research_OpportunitiesController extends Controller
 {
@@ -136,6 +138,20 @@ class Research_OpportunitiesController extends Controller
             $opportunity->research_end        = date('Y-m-d', strtotime($request->research_end));
             $opportunity->created_by          = Auth::user()->id;
             $opportunity->save();
+
+
+            $notificationData = array('title' => $request->title, 'description' => $request->description);
+            $matchedProfiles = notificationMatcher($request->category_id);
+
+            dd($matchedProfiles);
+            die();
+            foreach ($matchedProfiles as $matched) {
+                NewOpportunity::toMail($matchedProfiles, $notificationData);
+                NewOpportunity::toDatabase($matchedProfiles,$notificationData);
+            }
+
+
+
 
             // redirect
             Session::flash('message', 'Successfully created research opportunity!');

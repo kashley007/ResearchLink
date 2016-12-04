@@ -1,6 +1,7 @@
 <?php
 use App\Research_Opportunity;
 use App\Profile;
+use App\User;
 //use App\Saved_Opportunity;
 //Get the total number of research opportunities available
 function totalOpportunities() {
@@ -84,6 +85,22 @@ function getCategories(){
 	$allCategories = DB::table('categories')->get();
 	return $allCategories;
 }
+
+function notificationMatcher($value){
+
+	$users = new \Illuminate\Database\Eloquent\Collection;
+	$profiles = DB::table('interest_areas')->where([
+		['user_type', '=', 'Student'],
+		['category_id','=', $value]])->get();
+
+	foreach ($profiles as $profile) {
+		$user = User::where('id', '=', $profile->user_id)->first();
+		$users->add($user);
+	}
+	return $users;
+}
+
+
 
 //Get all Faculty Members for Lead Researcher
 function getFaculty(){
