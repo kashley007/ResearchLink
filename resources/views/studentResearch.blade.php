@@ -27,7 +27,11 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    
+                      @if(Auth::user()->profile->major)
+                        <h2>{{ Auth::user()->profile->major }}</h2>
+                      @else
+                        <h2>All</h2>
+                      @endif
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -48,15 +52,7 @@
                   <div class="x_content">
                       {{ csrf_field() }}
                       <div class="row">
-                        <div class="row">
-                          <div class="col-xs-12 col-sm-8">
-                            @if(Auth::user()->profile->major)
-                              <h3>{{ Auth::user()->profile->major }}&nbspOpportunities</h3>
-                            @else
-                              <h3>Current Opportunities</h3>
-                            @endif
-                          </div>
-                        </div>
+                       
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                           <?php $count = 1 ?>
                         @foreach($opportunities as $opportunity)

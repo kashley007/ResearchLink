@@ -121,5 +121,45 @@
           </div>
         </div>
         <!-- /page content -->
+        <!--Modal -->
+        <div id="researchAlert" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">x</span>
+            <h4>Add some opportunities!</h4>
+            <p>Currently, you do not have any active research opportunities. Once they have been created, you will see them here.</p>
+          </div>
+        </div>
+        <script type="text/javascript">
+          // Get the modal
+          var modal = document.getElementById('researchAlert');
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+          
+          if({{ $opportunities }} == 0){
+          
+          // Add an event listener
+            document.addEventListener("emptyOpps", function(e) {
+          
+                modal.style.display = "block";
+              
+            })
+          }
+          var event = new Event('emptyOpps');
+          
+          // Dispatch/Trigger/Fire the event
+          document.dispatchEvent(event);
+          
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }
+        </script>
     
 @endsection

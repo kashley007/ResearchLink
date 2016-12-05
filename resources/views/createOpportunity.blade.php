@@ -55,7 +55,7 @@
                       <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                         <label for="title" class="control-label col-md-3 col-sm-3 col-xs-12">Title:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="title" class="form-control col-md-7 col-xs-12" type="text" name="title" value="">
+                          <input id="title" class="form-control col-md-7 col-xs-12" type="text" name="title" value="{{ old('title') }}">
                           @if ($errors->has('title'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('title') }}</strong>
@@ -66,7 +66,7 @@
                       <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="description" type="text" class="form-control col-md-7 col-xs-12" name="description"  value=""></textarea>
+                          <textarea id="description" type="text" class="form-control col-md-7 col-xs-12" name="description">{{ old('description') }}</textarea>
                           @if ($errors->has('description'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('description') }}</strong>
@@ -101,7 +101,7 @@
                         <div id="form_pay_amount" class="form-group{{ $errors->has('payment_amount') ? ' has-error' : '' }}">
                           <label for="payment_amount" class="control-label col-md-3 col-sm-3 col-xs-12">Payment Amount:</label>
                           <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                            <input id="payment_amount" class="form-control col-md-7 col-xs-12" type="text" name="payment_amount" value="">
+                            <input id="payment_amount" class="form-control col-md-7 col-xs-12" type="text" name="payment_amount" value="{{ old('payment_amount') }}">
                             @if ($errors->has('payment_amount'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('payment_amount') }}</strong>
@@ -117,57 +117,45 @@
                       <div class="form-group{{ $errors->has('app_start') ? ' has-error' : '' }}">
                         <label for="app_start" class="control-label col-md-3 col-sm-3 col-xs-12">Application Start:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_start" id='datetimepicker1' />
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_start" id='datetimepicker1' value="{{ old('app_start') }}" />
                           @if ($errors->has('app_start'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('app_start') }}</strong>
                               </span>
                           @endif
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
                         </div>
                       </div>
                       <div class="form-group{{ $errors->has('app_end') ? ' has-error' : '' }}">
                         <label for="app_end" class="control-label col-md-3 col-sm-3 col-xs-12">Application End:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_end" id='datetimepicker2' />
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_end" id='datetimepicker2' value="{{ old('app_end') }}"/>
                           @if ($errors->has('app_end'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('app_end') }}</strong>
                               </span>
                           @endif
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
                         </div>
                       </div>
                       <div class="form-group{{ $errors->has('research_start') ? ' has-error' : '' }}">
                         <label for="research_start" class="control-label col-md-3 col-sm-3 col-xs-12">Opportunity Start:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control " name="research_start" id='datetimepicker3' />
+                          <input type='text' class="form-control " name="research_start" id='datetimepicker3' value="{{ old('research_start') }}"/>
                           @if ($errors->has('research_start'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('research_start') }}</strong>
                               </span>
                             @endif
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
                         </div>
                       </div>
                       <div class="form-group{{ $errors->has('research_end') ? ' has-error' : '' }}">
                         <label for="research_end" class="control-label col-md-3 col-sm-3 col-xs-12">Opportunity End:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="research_end" id='datetimepicker4' />
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="research_end" id='datetimepicker4' value="{{ old('research_end') }}" />
                           @if ($errors->has('research_end'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('research_end') }}</strong>
                               </span>
                           @endif
-                          <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                          </span>
                         </div>
                       </div>
                       
@@ -175,7 +163,7 @@
                         <label for="type" class="control-label col-md-3 col-sm-3 col-xs-12">Type:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="ui-select">
-                            <select id="type" class="form-control col-md-7 col-xs-12" name="type" value="">
+                            <select id="type" class="form-control col-md-7 col-xs-12" name="type" value="value="{{ old('type') }}"">
                               <option value="">select...</option>
                               <option value="Internal">Internal</option>
                               <option value="External">External</option>
@@ -193,7 +181,7 @@
                         <label for="agency_id" class="control-label col-md-3 col-sm-3 col-xs-12">Agency:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="ui-select">
-                            <select id="agency_id" class="form-control col-md-7 col-xs-12" name="agency_id" value="">
+                            <select id="agency_id" class="form-control col-md-7 col-xs-12" name="agency_id" value="{{ old('agency_id') }}">
                               <option value="">select...</option>
                               @foreach($agencies as $agency)
                                 <option value="{{ $agency->id }}">{{ $agency->name }}</option>
@@ -211,7 +199,7 @@
                         <label for="department_id" class="control-label col-md-3 col-sm-3 col-xs-12">Department:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="ui-select">
-                            <select id="create_opp_filter" class="form-control col-md-7 col-xs-12" name="department_id" value="">
+                            <select id="create_opp_filter" class="form-control col-md-7 col-xs-12" name="department_id" value="{{ old('department_id') }}">
                               <option value="">select...</option>
                               @foreach($departments as $department)
                                 <option value="{{ $department->id }}">{{ $department->name }}</option>

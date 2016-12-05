@@ -65,7 +65,7 @@
                           </h5>
                           <h5>
                             <span class="profile_label">Application Deadline:
-                            </span>{{$opportunity->app_end}}
+                            </span>{{ date("m/d/Y", strtotime($opportunity->app_end)) }}
                           </h5>
                           <h5>
                             <span class="profile_label">Research Lead:
@@ -94,19 +94,27 @@
                           </h5>
                           <h5>
                             <span class="profile_label">Research Start Date:
-                            </span>{{$opportunity->research_start}}
+                            </span>{{ date("m/d/Y", strtotime($opportunity->research_start)) }}
                           </h5>
                           <h5>
                             <span class="profile_label">Contact:
                             </span>{{$opportunity->user->email}}
                           </h5>
                         </div>
-                        <p>{{ $opportunity->description }}</p>  <!-- MODIFY FOR THE REST OF THE FIELDS -->
                       </div>
-                      
+
+                      <div id="research_description" class="row">
+                        <div class="col-sm-12">
+                          <h5>
+                            <span class="profile_label">Description:
+                          </h5>
+                            <p>{{ $opportunity->description }}</p>
+                          </div>
+                      </div>
                         @if(Auth::user()->profile->user_type == 'Faculty')
-                          <a class="btn btn-default" href="{{ url('/research/' .$opportunity->id .'/edit') }}">Edit</a>
-                          <a data-token="{{ csrf_token() }}" name="{{ $opportunity->id }}" class="btn btn-default delete">Delete</a></td>
+                          <a class="btn btn-default button_design" href="{{ url('/research/' .$opportunity->id .'/edit') }}">Edit</a>
+                          <a data-token="{{ csrf_token() }}" name="{{ $opportunity->id }}" class="btn btn-default delete button_design">Delete</a>
+                          <a class="btn btn-default button_design" href="{{ url('/research') }}">Cancel</a>
                         @endif
                    
                   </div>

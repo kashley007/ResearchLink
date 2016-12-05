@@ -62,6 +62,8 @@
         <script src="{{ asset("vendors/jquery/dist/jquery.min.js")}}"></script>
         <!-- jQuery Smart Wizard -->
         <script src="{{ asset("vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js")}}"></script>
+         <!-- jquery.inputmask -->
+        <script src="{{ asset("vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js")}}"></script>
         <!-- Bootstrap -->
         <script src="{{ asset("vendors/bootstrap/dist/js/bootstrap.min.js")}}"></script>
         <!-- FastClick -->
@@ -294,6 +296,11 @@
                     singleDatePicker: true,
                     singleClasses: "picker_4",
                 });
+
+                
+    
+                //Input mask
+                $(":input").inputmask();
                 
             });
         </script>

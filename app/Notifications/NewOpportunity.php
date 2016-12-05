@@ -24,8 +24,8 @@ class NewOpportunity extends Notification implements ShouldQueue
         $notification = new Notification_Model;
         $notification->user_id = $user->id;
         $notification->type_of_notification = 'newOpportunity';
-        $notification->title_html = 'New Opportunity!';
-        $notification->body_html = 'A new opportunity, ' . $notificationData['title'] . ', related to your interests has been created!'; //Need link to application
+        $notification->title_html = $notificationData['title'];
+        $notification->body_html = 'This newly created opportunity matches one your interest areas.';  //Need link to application
         $notification->is_read = 0;
         $notification->save();
     }
@@ -35,7 +35,7 @@ class NewOpportunity extends Notification implements ShouldQueue
         //Create register email
         Mail::queue('auth.emails.matchedOpportunity', ['user' => $user], function ($message) use ($user) {
             $message->to($user['email'], $user['first_name'])
-               ->subject('A new Research Opportunity has been created!');
+               ->subject('Matched Research Opportunity');
         });
 
     }

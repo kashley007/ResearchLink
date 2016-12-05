@@ -31,7 +31,7 @@ function getAllOpportunities() {
 //Get research opportunities matched with major
 function getMatchedMajor() {
 	$major = DB::table('academic_subjects')->where('name', '=', Auth::user()->profile->major)->first();
-	$opportunities = Research_Opportunity::where('department_id', '=', $major->id)->get();	
+	$opportunities = Research_Opportunity::where('department_id', '=', $major->department_id)->get();	
 	return $opportunities;
 }
 //Get research opportunities matched with department

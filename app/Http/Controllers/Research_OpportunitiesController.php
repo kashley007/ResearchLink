@@ -95,22 +95,24 @@ class Research_OpportunitiesController extends Controller
             'description' => 'required',
             'app_start' => 'date|before:app_end',
             'app_end' => 'date|after:app_start',
-            'research_start' => 'date|before:research_end',
-            'research_end' => 'date|after:research_start',
+            'research_start' => 'date|before:research_end|after:app_start|after:app_end',
+            'research_end' => 'date|after:research_start|after:app_start|after:app_end',
             'type' => 'required',
+            'payment_amount' => 'numeric',
             'agency_id' => 'required',
             'department_id' => 'required',
             'category_id' => 'required',
             'user_id' => 'required',
 
         ],[
-            'title.regex' => 'Please enter a valid opportunity title',
-            'title.required' => 'Please enter a valid opportunity title',
+            'title.regex' => 'Please enter a valid opportunity Title',
+            'title.required' => 'Please enter a valid opportunity Title',
             'title.unique' => 'Opportunity already exists',
-            'agency_id.required' => 'The agency field is required',
-            'department_id.required' => 'The department field is required',
-            'category_id.required' => 'The category field is required',
-            'user_id.required' => 'The research lead field is required',
+            'agency_id.required' => 'The Agency field is required',
+            'department_id.required' => 'The Department field is required',
+            'category_id.required' => 'The Category field is required',
+            'user_id.required' => 'The Research Lead field is required',
+            'payment_amount' => 'Payment Amount should only contain numbers'
         ]);
         if ($validator->fails()) {
             Session::flash('message', 'There was an issue with creating that opportunity'); 
@@ -201,8 +203,9 @@ class Research_OpportunitiesController extends Controller
             'description' => 'required',
             'app_start' => 'date|before:app_end',
             'app_end' => 'date|after:app_start',
-            'research_start' => 'date|before:research_end',
-            'research_end' => 'date|after:research_start',
+            'research_start' => 'date|before:research_end|after:app_start|after:app_end',
+            'research_end' => 'date|after:research_start|after:app_start|after:app_end',
+            'payment_amount' => 'numeric',
             'type' => 'required',
             'agency_id' => 'required',
             'department_id' => 'required',
@@ -210,13 +213,14 @@ class Research_OpportunitiesController extends Controller
             'user_id' => 'required',
 
         ],[
-            'title.regex' => 'Please enter a valid opportunity title',
-            'title.required' => 'Please enter a valid opportunity title',
+            'title.regex' => 'Please enter a valid opportunity Title',
+            'title.required' => 'Please enter a valid opportunity Title',
             'title.unique' => 'Opportunity already exists',
-            'agency_id.required' => 'The agency field is required',
-            'department_id.required' => 'The department field is required',
-            'category_id.required' => 'The category field is required',
-            'user_id.required' => 'The research lead field is required',
+            'agency_id.required' => 'The Agency field is required',
+            'department_id.required' => 'The Department field is required',
+            'category_id.required' => 'The Category field is required',
+            'user_id.required' => 'The Research Lead field is required',
+            'payment_amount' => 'Payment Amount should only contain numbers'
         ]);
         if ($validator->fails()) {
             Session::flash('message', 'There was an issue with creating that opportunity'); 
