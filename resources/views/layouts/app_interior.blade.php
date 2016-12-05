@@ -259,6 +259,11 @@
                     }
                 });
                 
+                if ($('#toggle_pay').find('#checked').length) {
+                    $('#toggle_pay span').addClass( "payMe" );
+                    $('#form_pay_amount').css('display', 'inline');
+
+                }
                 $('#toggle_pay span').click(function(){
             
                     if ( $( this ).hasClass( "payMe" ) ) {

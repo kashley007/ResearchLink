@@ -55,7 +55,7 @@
                       <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                         <label for="title" class="control-label col-md-3 col-sm-3 col-xs-12">Title:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="title" class="form-control col-md-7 col-xs-12" type="text" name="title" value="{{ Auth::user()->title }}">
+                          <input id="title" class="form-control col-md-7 col-xs-12" type="text" name="title" value="">
                           @if ($errors->has('title'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('title') }}</strong>
@@ -66,7 +66,7 @@
                       <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="description" type="text" class="form-control col-md-7 col-xs-12" name="description"  value="{{ Auth::user()->description }}">
+                          <textarea id="description" type="text" class="form-control col-md-7 col-xs-12" name="description"  value=""></textarea>
                           @if ($errors->has('description'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('description') }}</strong>

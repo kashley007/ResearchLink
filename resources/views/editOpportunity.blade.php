@@ -46,7 +46,8 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ URL::to('/research') }}">
+                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/research/' . $opportunity->id) }}">
+                        <input name="_method" type="hidden" value="PUT">
                         {{ csrf_field() }}
                         @if(Session::has('message'))
                           <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
@@ -66,7 +67,7 @@
                       <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                         <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">Description:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="description" type="text" class="form-control col-md-7 col-xs-12" name="description"  value="{{ $opportunity->description }}">
+                          <textarea id="description" type="text" class="form-control col-md-7 col-xs-12" name="description">{{ $opportunity->description }}</textarea>
                           @if ($errors->has('description'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('description') }}</strong>
@@ -78,22 +79,38 @@
                         <label for="distance_learning" class="control-label col-md-3 col-sm-3 col-xs-12">Distance Learning:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="hidden" value="0"/>
-                          <div class="">
-                            <label>
-                              <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1"/>
-                            </label>
-                          </div>
+                          @if($opportunity->distance_learning == 1)
+                            <div class="">
+                              <label>
+                                <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1" checked/>
+                              </label>
+                            </div>
+                          @else
+                            <div class="">
+                              <label>
+                                <input id="distance_learning" class="form-control js-switch col-md-7 col-xs-12" name="distance_learning" type="checkbox" value="1"/>
+                              </label>
+                            </div>
+                          @endif
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="paid" class="control-label col-md-3 col-sm-3 col-xs-12">Paid:</label>
                         <div id="toggle_pay" class="col-md-6 col-sm-6 col-xs-12">
                           <input id="paid" class="form-control js-switch col-md-7 col-xs-12" name="paid" type="hidden" value="0"/>
-                            <div class="">
-                              <label>
-                                <input id="paid" class="form-control js-switch col-md-7 col-xs-12" name="paid" type="checkbox" value="1"/>
-                              </label>
-                            </div>
+                            @if($opportunity->paid == 1)
+                              <div id="checked" class="">
+                                <label>
+                                  <input id="paid" class="form-control js-switch col-md-7 col-xs-12" name="paid" type="checkbox" value="1" checked/>
+                                </label>
+                              </div>
+                            @else
+                              <div class="">
+                                <label>
+                                  <input id="paid" class="form-control js-switch col-md-7 col-xs-12" name="paid" type="checkbox" value="1"/>
+                                </label>
+                              </div>
+                            @endif
                         </div>
                       </div>
                       
@@ -117,7 +134,7 @@
                       <div class="form-group{{ $errors->has('app_start') ? ' has-error' : '' }}">
                         <label for="app_start" class="control-label col-md-3 col-sm-3 col-xs-12">Application Start:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_start" id='datetimepicker1' value='{{ $opportunity->app_start }}'/>
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_start" id='datetimepicker1' value='{{ date("m/d/Y", strtotime($opportunity->app_start))}}'/>
                           @if ($errors->has('app_start'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('app_start') }}</strong>
@@ -131,7 +148,7 @@
                       <div class="form-group{{ $errors->has('app_end') ? ' has-error' : '' }}">
                         <label for="app_end" class="control-label col-md-3 col-sm-3 col-xs-12">Application End:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_end" id='datetimepicker2' value='{{ $opportunity->app_end }}'/>
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="app_end" id='datetimepicker2' value='{{ date("m/d/Y", strtotime($opportunity->app_end)) }}'/>
                           @if ($errors->has('app_end'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('app_end') }}</strong>
@@ -145,7 +162,7 @@
                       <div class="form-group{{ $errors->has('research_start') ? ' has-error' : '' }}">
                         <label for="research_start" class="control-label col-md-3 col-sm-3 col-xs-12">Opportunity Start:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control " name="research_start" id='datetimepicker3' value='{{ $opportunity->research_start }}'/>
+                          <input type='text' class="form-control " name="research_start" id='datetimepicker3' value='{{ date("m/d/Y", strtotime($opportunity->research_start)) }}'/>
                           @if ($errors->has('research_start'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('research_start') }}</strong>
@@ -159,7 +176,7 @@
                       <div class="form-group{{ $errors->has('research_end') ? ' has-error' : '' }}">
                         <label for="research_end" class="control-label col-md-3 col-sm-3 col-xs-12">Opportunity End:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 input-group">
-                          <input type='text' class="form-control col-md-7 col-xs-12" name="research_end" id='datetimepicker4' value='{{ $opportunity->research_end }}'/>
+                          <input type='text' class="form-control col-md-7 col-xs-12" name="research_end" id='datetimepicker4' value='{{ date("m/d/Y", strtotime($opportunity->research_end)) }}'/>
                           @if ($errors->has('research_end'))
                               <span class="help-block">
                                   <strong>{{ $errors->first('research_end') }}</strong>
@@ -264,7 +281,7 @@
                             <i class="fa fa-btn fa-user"></i> Edit Opportunity
                           </button>
                           <span></span>
-                          <a class="btn btn-default" href="{{ URL::to('/profile/student') }}">Cancel</a>
+                          <a class="btn btn-default" href="{{ URL::to('/research/'.$opportunity->id) }}">Cancel</a>
                         </div>
                       </div>
                     </form>
