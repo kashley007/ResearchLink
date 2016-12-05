@@ -103,7 +103,7 @@
                                       </h5>
                                       </div>
                                     </div>
-                                    <span class="profile_label">Description:</span>
+                                    <h5><span class="profile_label">Description:</span></h5>
                                     <p>{{$opportunity->description}}</p>
                                     <a class="detailLink" href="{{ URL::to('/research/'.$opportunity->id) }}">Click For More Information
                                       </a>

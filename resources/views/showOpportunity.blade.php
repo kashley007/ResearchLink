@@ -113,7 +113,7 @@
                       </div>
                         @if(Auth::user()->profile->user_type == 'Faculty')
                           <a class="btn btn-default button_design" href="{{ url('/research/' .$opportunity->id .'/edit') }}">Edit</a>
-                          <a data-token="{{ csrf_token() }}" name="{{ $opportunity->id }}" class="btn btn-default delete button_design">Delete</a>
+                          <a data-token="{{ csrf_token() }}" name="{{ $opportunity->id }}" class="btn btn-default delete_opp button_design">Delete</a>
                           <a class="btn btn-default button_design" href="{{ url('/research') }}">Cancel</a>
                         @endif
                    

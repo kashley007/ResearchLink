@@ -153,6 +153,9 @@
   border-color: #005091;
   color: #FFF;
 }
+.x_content p {
+  font-size: 15px;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

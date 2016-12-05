@@ -155,8 +155,22 @@
                       url: '{{ url('notification/delete') }}' + '/' + dataId,
                       type: "post",
                       data: {'_token': $('input[name=_token]').val()},
-                    });      
+                    });
+                    $.get("{{ url('notification/count')}}",  
+                        function(data) {
+                            if(data.length == 0){
+                                var lead = $('#notification_count');
+                                lead.css("display", "none");
+                                
+                            }else{
+                                var lead = $('#notification_count');
+                                lead.empty();
+                                lead.append(data.length);
+                        }
+
+                    });       
                 });
+                
                 //Mark notification as read
                 $('.markRead').click(function(){ 
                 var link = $(this);
@@ -172,6 +186,19 @@
                                     $('#readReplace').fadeIn("slow");
                             });
                         }
+                    });
+                    $.get("{{ url('notification/count')}}",  
+                        function(data) {
+                            if(data.length == 0){
+                                var lead = $('#notification_count');
+                                lead.css("display", "none");
+                                
+                            }else{
+                                var lead = $('#notification_count');
+                                lead.empty();
+                                lead.append(data.length);
+                            }
+
                     });      
                 });
 
@@ -261,6 +288,7 @@
                     }
                 });
                 
+                
                 if ($('#toggle_pay').find('#checked').length) {
                     $('#toggle_pay span').addClass( "payMe" );
                     $('#form_pay_amount').css('display', 'inline');
@@ -301,6 +329,19 @@
     
                 //Input mask
                 $(":input").inputmask();
+
+                // Admin Delete 
+                $('.delete_opp').click(function(){
+                    var page = window.location.pathname;
+                       
+                    $.ajax({
+                        url: page,
+                        type: "POST",
+                        data: {_method: 'delete', "_token": "{{ csrf_token() }}"},
+                        
+                    });
+                    $(this.parentNode.parentNode).fadeOut( "fast" );       
+                });
                 
             });
         </script>

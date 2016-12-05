@@ -260,6 +260,12 @@ class Research_OpportunitiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete
+        $opportunity = Research_Opportunity::find($id);
+        $opportunity->delete();
+
+        // redirect
+        Session::flash('message', 'Successfully deleted research opportunity!');
+        return Redirect::to('research/');
     }
 }

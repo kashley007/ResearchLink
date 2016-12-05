@@ -6,6 +6,7 @@ use App\Subject;
 use App\Course;
 use App\Category;
 use App\Profile;
+use App\Notification_Model;
 use App\User;
 use Illuminate\Support\Facades\Response;
 /*
@@ -83,6 +84,14 @@ Route::resource('subjects', 'SubjectController');
 //Notification Routes
 Route::post('notification/delete/{id}', 'NotificationController@delete');
 Route::post('notification/read/{id}', 'NotificationController@markRead');
+Route::get('notification/count', function(){
+    $notification = Notification_Model::where([
+      ['user_id', '=', Auth::user()->id],
+      ['is_read', '=', 0]
+      ]);
+    
+  return Response::make($notification->get(['title_html', 'body_html']));
+});
 
 //Research Routes
 Route::resource('research', 'Research_OpportunitiesController');
