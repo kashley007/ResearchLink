@@ -39,7 +39,7 @@
                     <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ URL::to('/research/create') }}">Create New</a></li>
-                            <li><a href="#">My Opportunities</a></li>
+                            <li><a href="{{ URL::to('/research') }}">My Opportunities</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-newspaper-o"></i> News <span class="fa fa-chevron-down"></span></a>

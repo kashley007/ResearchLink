@@ -47,11 +47,10 @@ class Research_OpportunitiesController extends Controller
 
             return view('studentResearch')->with('total',$total)->with('internal',$internal)->with('external',$external)->with('paid',$paid)->with('opportunities',$opportunities);
         }elseif(Auth::user()->profile->user_type == "Faculty"){
-            if(empty(Auth::user()->profile->department)){
-                $opportunities = getAllOpportunities();
-            }else{
-                $opportunities = getMatchedDept();
-            }
+            $opportunities = Research_Opportunity::where([
+                ['user_id', '=', Auth::user()->id],
+                ['created_by', '=', Auth::user()->id]
+                ])->get();
 
             return view('facultyResearch')->with('total',$total)->with('internal',$internal)->with('external',$external)->with('paid',$paid)->with('opportunities',$opportunities);
         }
@@ -164,7 +163,10 @@ class Research_OpportunitiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $opportunity = Research_Opportunity::find($id);
+
+        // show the view and pass the nerd to it
+        return view('showOpportunity')->with('opportunity',$opportunity);
     }
 
     /**
@@ -175,7 +177,13 @@ class Research_OpportunitiesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $opportunity = Research_Opportunity::find($id);
+        $agencies = getAgencies();
+        $departments = getAllDepartments();
+        $faculty = getFaculty();
+
+        // show the view and pass the nerd to it
+        return view('editOpportunity')->with('opportunity',$opportunity)->with('agencies',$agencies)->with('departments',$departments)->with('faculty',$faculty);
     }
 
     /**

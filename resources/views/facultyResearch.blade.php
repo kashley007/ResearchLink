@@ -6,7 +6,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Research Opportunities</h3>
+                <h3>My Opportunities</h3>
               </div>
 
               <div class="title_right">
@@ -48,15 +48,6 @@
                   <div class="x_content">
                       {{ csrf_field() }}
                       <div class="row">
-                        <div class="row">
-                          <div class="col-xs-12 col-sm-8">
-                            @if(Auth::user()->profile->major)
-                              <h3>{{ Auth::user()->profile->major }}&nbspOpportunities</h3>
-                            @else
-                              <h3>Current Opportunities</h3>
-                            @endif
-                          </div>
-                        </div>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                           <?php $count = 1 ?>
                         @foreach($opportunities as $opportunity)
