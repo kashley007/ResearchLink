@@ -6,14 +6,13 @@
     <body>
         
         <img src="{{ $message->embed(public_path() . '/images/ODULogo.jpg') }}" style="padding:0px; margin:0px; width:16%;" alt="ODU" />
-        <h3>A new Opportunity has been created!</h3>
+        <h3>New Opportunity</h3>
         <div>
         	<p>
         		Hey {{ $user['first_name'] }}!,<br/>
-            		A new research opportunity has been created related to your interests.
-           		Please follow the link below to access the new opportunity.</p><br/>
+            		A new research opportunity has been created that relates to your interests.<br/>
+           		<a href="http://researchlink.odu.edu/" target="_blank">Login</a> to ResearchLink to see what is new!</p><br/>
             <br/>
-            <a style="margin-top: 20px;" href="{{ $link = url('register/verify', $user['confirmation_code']) }}"> {{ $link }} </a>
         </div>
     </body>
 </html>

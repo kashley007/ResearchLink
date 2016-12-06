@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         require_once __DIR__ . '/../Http/profileHelpers.php';
         require_once __DIR__ . '/../Http/researchHelpers.php';
+        require_once __DIR__ . '/../Http/newsHelpers.php';
     }
 }
