@@ -45,8 +45,7 @@
                     </li>
                     <li><a><i class="fa fa-newspaper-o"></i> News <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">Current News</a></li>
-                            <li><a href="#">All</a></li>
+                            <li><a href="{{ URL::to('/news') }}">Current News</a></li>
                         </ul>
                     </li>
                 </ul>

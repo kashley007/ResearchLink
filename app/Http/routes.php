@@ -126,3 +126,6 @@ Route::get('createR/filtercategories', function(){
     $category = Category::where('department', '=', $department->id);
   return Response::make($category->get(['id', 'name']));
 });
+
+//News Routes
+Route::resource('news', 'NewsController');

@@ -34,7 +34,6 @@
                         <ul class="nav child_menu">
                             <li><a href="{{ URL::to('/profile/faculty') }}">View Profile</a></li>
                             <li><a href="{{ URL::to('/profile/faculty/edit') }}">Edit Profile</a></li>
-                            <li><a href="{{ URL::to('/profile/search') }}">Search Students</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>
@@ -46,7 +45,7 @@
                     <li><a><i class="fa fa-newspaper-o"></i> News <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="#">Create New</a></li>
-                            <li><a href="#">My News</a></li>
+                            <li><a href="{{ URL::to('/news') }}">My News</a></li>
                         </ul>
                     </li>
                 </ul>
