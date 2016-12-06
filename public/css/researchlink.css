@@ -190,6 +190,9 @@
     cursor: pointer;
 }
 /*Profile Search Page*/
-#name_search, #gpa_search, #grade_level_search, #major_search{
+#name_search, #gpa_search, #grade_level_search, #major_search, #submit_search{
   display: none;
+}
+#results {
+  margin-top: 40px;
 }

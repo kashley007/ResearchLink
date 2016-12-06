@@ -263,7 +263,8 @@ class ProfileController extends Controller
 
     public function profileSearch(){
         $subjects = getSubjects();
-        return view('profileSearch')->with('subjects', $subjects);
+        $profiles = getProfiles();
+        return view('profileSearch')->with('subjects', $subjects)->with('profiles', $profiles);
     }
 
 
@@ -271,9 +272,18 @@ class ProfileController extends Controller
 
     public function profileSearchResult(Request $request){
         $subjects = getSubjects();
+        
        // Session::flash('message', 'Search Executed.'."$choice with a value of $value");
         return view('profileSearch')->with('request', $request)->with('subjects', $subjects);
 
+    }
+
+    public function showProfile($id)
+    {
+        $profile = Profile::find($id);
+
+        // show the view and pass the nerd to it
+        return view('showProfile')->with('profile',$profile);
     }
 
 

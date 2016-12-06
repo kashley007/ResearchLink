@@ -55,6 +55,7 @@ Route::post('profile/resetPassword', 'ProfileController@resetPassword');
 Route::get('profile/student', 'ProfileController@index');
 Route::get('profile/student/edit', 'ProfileController@editStudentProfile');
 Route::post('profile/student/edit','ProfileController@updateStudentProfile');
+Route::get('profile/student/{id}', 'ProfileController@showProfile');
 
 //Faculty Profile Routes
 Route::get('profile/faculty', 'ProfileController@index');

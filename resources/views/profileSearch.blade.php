@@ -89,7 +89,7 @@
                             </div>
                             <div id="gpa_search">
                                 <div class="form-group{{ $errors->has('gpa') ? ' has-error' : '' }}">
-                                    <label for="gpa" class="control-label col-md-3 col-sm-3 col-xs-12">GPA:</label>
+                                    <label for="gpa" class="control-label col-md-3 col-sm-3 col-xs-12">Minimum GPA:</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="gpa" class="form-control col-md-7 col-xs-12" name="gpa" type="text" value="">
                                         @if ($errors->has('gpa'))
@@ -121,12 +121,8 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="ui-select">
                                             <select id="grade_level" class="form-control col-md-7 col-xs-12" name="grade_level" value="">
-                                                @if(Auth::user()->profile->grade_level)
-                                                  <option style="display:none;" value="{{ Auth::user()->profile->grade_level }}">{{ Auth::user()->profile->grade_level }}</option>
-                                                  <option value=""></option>
-                                                @else
-                                                  <option value="">select...</option>
-                                                @endif
+                                               
+                                                <option value="">select...</option>
                                                 <option value="Freshman">Freshman</option>
                                                 <option value="Sophomore">Sophomore</option>
                                                 <option value="Junior">Junior</option>
@@ -136,7 +132,56 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="submit_search">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <button type="submit" class="btn btn-primary" id="updateProfile">
+                                          <i class="fa fa-btn fa-user"></i> Search
+                                        </button>
+                                        <span></span>
+                                        <a class="btn btn-default" href="{{ URL::to('/home') }}">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
+                        <div id="results">
+                            @foreach($profiles as $profile)
+                                <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+                                            <div class="left col-xs-7">
+                                                <h2>{{$profile->user->first_name}} {{$profile->user->last_name}}</h2>
+                                                <p><strong>Major: </strong> {{$profile->major}}</p>
+                                                <p><strong>Grade Level: </strong> {{$profile->grade_level}}</p>
+                                              <ul class="list-unstyled">
+                                                <li><i class="fa fa-home"></i> Address: {{$profile->address}}</li>
+                                                <li><i class="fa fa-building"></i> City: {{$profile->city}}, {{$profile->state}}</li>
+                                                <li><i class="fa fa-phone"></i> Phone #: {{$profile->phone}}</li>
+                                              </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                @if( $profile->image_name )
+                                                    <img id="profile_image" src="{{URL::asset('/images/Profile_Images/')}}/{{$profile->image_name }}" class="img-circle img-responsive" alt="avatar">
+                                                @else
+                                                    <img id="profile_image" class="img-circle img-responsive" src="{{ asset('/images/Profile_Images/profile_placeholder.jpg')}}" alt="Avatar" title="Change the avatar">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                              
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 emphasis" style="text-align: right;">
+                                              <button type="button" class="btn btn-primary btn-xs">
+                                                <i class="fa fa-user"> </i> View Profile
+                                              </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

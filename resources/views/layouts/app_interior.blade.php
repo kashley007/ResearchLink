@@ -358,26 +358,41 @@
                             $('#name_search').css('display', 'none');
                             $('#grade_level_search').css('display', 'none');
                             $('#major_search').css('display', 'none');
+                            $('#submit_search').css('display', 'inline');
                             break;
                         case "name":
                             $('#gpa_search').css('display', 'none');
                             $('#name_search').css('display', 'inline');
                             $('#grade_level_search').css('display', 'none');
                             $('#major_search').css('display', 'none');
+                            $('#submit_search').css('display', 'inline');
                             break;
                         case "major":
                             $('#gpa_search').css('display', 'none');
                             $('#name_search').css('display', 'none');
                             $('#grade_level_search').css('display', 'none');
                             $('#major_search').css('display', 'inline');
+                            $('#submit_search').css('display', 'inline');
                             break;
                         case "grade_level":
                             $('#gpa_search').css('display', 'none');
                             $('#name_search').css('display', 'none');
                             $('#grade_level_search').css('display', 'inline');
                             $('#major_search').css('display', 'none');
+                            $('#submit_search').css('display', 'inline');
                             break;
+                        case "":
+                            $('#gpa_search').css('display', 'none');
+                            $('#name_search').css('display', 'none');
+                            $('#grade_level_search').css('display', 'none');
+                            $('#major_search').css('display', 'none');
+                            $('#submit_search').css('display', 'none');
+                        break;
                     }
+                });
+
+                $('.delete_opp').click(function(){
+                    
                 });
             });
         </script>

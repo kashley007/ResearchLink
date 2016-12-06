@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Courses_Taken;
 use App\Courses_Taught;
 use App\Interest_Areas;
+use App\Profile;
 
 //Get the overall completion percentage of the student profile
 function percentComplete() {
@@ -353,4 +354,9 @@ function processProfileImage($request, $profile){
     
             $profile->image_name = $filename;
         }
+}
+
+function getProfiles(){
+    $students = Profile::where('user_type', '=', 'Student')->get();
+    return $students;
 }
