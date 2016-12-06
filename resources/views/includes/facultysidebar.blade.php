@@ -34,6 +34,7 @@
                         <ul class="nav child_menu">
                             <li><a href="{{ URL::to('/profile/faculty') }}">View Profile</a></li>
                             <li><a href="{{ URL::to('/profile/faculty/edit') }}">Edit Profile</a></li>
+                            <li><a href="{{ URL::to('/profile/search') }}">Search Student</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Research <span class="fa fa-chevron-down"></span></a>

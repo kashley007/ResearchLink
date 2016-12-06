@@ -71,6 +71,15 @@ Route::get('profile/filtercategories', function(){
 });
 
 
+
+Route::get('profile/search', 'ProfileController@profileSearch');
+
+Route::post('profile/search','ProfileController@profileSearchResult');
+
+
+
+
+
 //Admin Routes
 Route::get('admin/database', 'AdminController@databaseAdmin');
 Route::get('admin/site', 'AdminController@siteAdmin');

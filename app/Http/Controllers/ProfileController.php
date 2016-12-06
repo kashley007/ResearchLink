@@ -13,6 +13,12 @@ use App\Interest_Areas;
 use App\Department;
 use Illuminate\Http\Response;
 
+
+
+
+
+
+
 class ProfileController extends Controller
 {
     /*
@@ -252,4 +258,22 @@ class ProfileController extends Controller
             }
         } 
     }
+
+
+
+    public function profileSearch(){
+        return view('profileSearch');
+    }
+
+
+
+
+    public function profileSearchResult(Request $request){
+
+       // Session::flash('message', 'Search Executed.'."$choice with a value of $value");
+        return view('profileSearch')->with('request', $request);
+
+    }
+
+
 }
