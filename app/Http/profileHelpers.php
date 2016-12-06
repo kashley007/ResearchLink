@@ -6,7 +6,7 @@ use App\Courses_Taken;
 use App\Courses_Taught;
 use App\Interest_Areas;
 use App\Profile;
-
+use App\User;
 //Get the overall completion percentage of the student profile
 function percentComplete() {
         if(Auth::user()->profile->user_type == "Student") {
@@ -360,3 +360,63 @@ function getProfiles(){
     $students = Profile::where('user_type', '=', 'Student')->get();
     return $students;
 }
+function filterProfiles($value){
+    $students = Profile::where('user_type', '=', $value)->get();
+    return $students;
+}
+function gpaProfiles($value){
+    $students = Profile::where('gpa', '>=', $value)->orderBy('gpa', 'desc')->get();
+    return $students;
+}
+function majorProfiles($value){
+    $students = Profile::where('major', '=', $value)->get();
+    return $students;
+}
+function gradeProfiles($value){
+    $students = Profile::where('grade_level', '=', $value)->get();
+    return $students;
+}
+function fullNameProfiles($value){
+    
+     $profiles = Profile::whereHas('user', function($query) use ($value){
+        $query->where([
+            ['first_name', $value->first_name],
+            ['last_name', $value->last_name],
+            ['user_type', 'Student']
+        ]);
+        
+    })->get(); 
+
+    return $profiles;
+            
+}
+function firstNameProfiles($value){
+    
+     $profiles = Profile::whereHas('user', function($query) use ($value){
+        $query->where([
+            ['first_name', $value->first_name],
+            ['user_type', 'Student'],
+        ]);
+        
+    })->get(); 
+
+    return $profiles;
+            
+}
+function lastNameProfiles($value){
+    
+     $profiles = Profile::whereHas('user', function($query) use ($value){
+        $query->where([
+            ['last_name', $value->last_name],
+            ['user_type', 'Student'],
+
+        ]);
+        
+    })->get(); 
+
+    return $profiles;
+            
+}
+
+
+

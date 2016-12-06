@@ -57,7 +57,7 @@
                           @endif
                         </div>
                       </div>
-                      <h3>{{$profile->first_name }} {{$profile->last_name }}</h3>
+                      <h3>{{$profile->user->first_name }} {{$profile->user->last_name }}</h3>
 
                       <ul class="list-unstyled user_data">
                         <li>
@@ -80,7 +80,6 @@
                         </li>
                       </ul>
 
-                      <a id="edit_profile" class="btn btn-success" href="{{ URL::to('/profile/student/edit') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                       <br />
 
 
@@ -98,24 +97,21 @@
                             <!-- start Personal -->
                             <div class="row">  
                               <div class="col-md-6 col-xs-12">
-                                <h4><span class="profile_label">Email:</span> {{ $profile->email }}</h4>
+                                <h4><span class="profile_label">Email:</span> {{ $profile->user->email }}</h4>
                                 <h4><span class="profile_label">Phone:</span> {{ $profile->phone }}</h4>
                                 <h4><span class="profile_label">Address:</span> {{ $profile->address }}</h4>
                                 <h4><span class="profile_label">City:</span> {{ $profile->city }}</h4>
                                 <h4><span class="profile_label">State:</span> {{ $profile->state }}</h4>
                                 <h4><span class="profile_label">Zip:</span> {{ $profile->zipcode }}</h4>
-                                @if(count($interestAreas) != 0)
+                                @if(count($profile->user->interestAreas) != 0)
                                   <h4><span class="profile_label">Research Interests:</span></h4>
                                   <table class="table table-striped">
                                     <tbody>
-                                      @foreach($categories as $category)
-                                      @foreach($interestAreas as $interestArea)
-                                        @if($category->id == $interestArea->category_id)
+                                      @foreach($profile->user->interestAreas as $tp)
+                                      
                                           <tr>
-                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $tp->category->name }}</td>
                                           </tr>
-                                        @endif
-                                      @endforeach
                                     @endforeach
                                     </tbody>  
                                   </table>
@@ -137,7 +133,7 @@
                                     <h4><span class="profile_label">Distance Learning:</span> No</h4>
                                   @endif
                                   <h4><span class="profile_label">GPA:</span> {{$profile->gpa }}</h4>
-                                  @if(count($coursesTaken) != 0)
+                                  @if(count($profile->user->coursesTaken) != 0)
                                     <h4><span class="profile_label">Completed Courses:</span></h4>
                                     <table class="table table-striped">
                                       <thead>
@@ -147,16 +143,16 @@
                                         </tr>
                                       </thead>
                                       <tbody>                          
-                                        @foreach($courses as $course)
-                                          @foreach($coursesTaken as $courseTaken)
-                                            @if($course->idcourses == $courseTaken->course_id)
+          
+                                          @foreach($profile->user->coursesTaken as $ct)
+                                           
                                               <tr>
-                                                <td>{{ $course->course_number }}</td>
-                                                <td>{{ $course->name }}</td>
+                                                <td>{{ $ct->course->course_number }}</td>
+                                                <td>{{ $ct->course->name }}</td>
                                               </tr>
-                                            @endif
+                                          
                                           @endforeach
-                                        @endforeach
+                                     
                                       </tbody>
                                     </table>
                                   @endif

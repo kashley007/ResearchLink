@@ -11,6 +11,8 @@ use App\Http\Requests;
 use App\Courses_Taken;
 use App\Interest_Areas;
 use App\Department;
+use App\User;
+use App\Profile;
 use Illuminate\Http\Response;
 
 
@@ -271,10 +273,33 @@ class ProfileController extends Controller
 
 
     public function profileSearchResult(Request $request){
+      
         $subjects = getSubjects();
         
-       // Session::flash('message', 'Search Executed.'."$choice with a value of $value");
-        return view('profileSearch')->with('request', $request)->with('subjects', $subjects);
+        if($request->has('gpa')){
+
+            $profiles = gpaProfiles($request->gpa);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }elseif($request->has('major')){
+            $profiles = majorProfiles($request->major);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }elseif($request->has('grade_level')){
+            $profiles = gradeProfiles($request->grade_level);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }elseif($request->has('first_name') and $request->has('last_name')){
+            $profiles = fullNameProfiles($request);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }elseif($request->has('first_name')){
+            $profiles = firstNameProfiles($request);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }elseif($request->has('last_name')){
+            $profiles = lastNameProfiles($request);
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }else{
+            $profiles = getProfiles();
+            return view('profileSearch')->with('profiles', $profiles)->with('subjects', $subjects);
+        }
+        
 
     }
 
@@ -283,7 +308,7 @@ class ProfileController extends Controller
         $profile = Profile::find($id);
 
         // show the view and pass the nerd to it
-        return view('showProfile')->with('profile',$profile);
+        return view('showProfile')->with('profile', $profile);
     }
 
 

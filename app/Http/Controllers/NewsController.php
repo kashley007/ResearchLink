@@ -31,6 +31,7 @@ class NewsController extends Controller
      */
     public function index()
     {
+        
         if(Auth::user()->profile->user_type == "Faculty"){
             $news = News::where('user_id', '=', Auth::user()->id)->get();
 

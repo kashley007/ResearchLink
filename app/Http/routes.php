@@ -128,4 +128,10 @@ Route::get('createR/filtercategories', function(){
 });
 
 //News Routes
-Route::resource('news', 'NewsController');
+Route::resource('newsFeature', 'NewsController');
+
+
+
+
+
+

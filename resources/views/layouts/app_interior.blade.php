@@ -351,7 +351,7 @@
                 });
 
                 $('#search_select').change(function(){
-                    
+                    console.log($(this).val());
                     switch ($(this).val()) {
                         case "gpa":
                             $('#gpa_search').css('display', 'inline');
@@ -381,6 +381,13 @@
                             $('#major_search').css('display', 'none');
                             $('#submit_search').css('display', 'inline');
                             break;
+                        case "all":
+                            $('#gpa_search').css('display', 'none');
+                            $('#name_search').css('display', 'none');
+                            $('#grade_level_search').css('display', 'none');
+                            $('#major_search').css('display', 'none');
+                            $('#submit_search').css('display', 'inline');
+                        break;
                         case "":
                             $('#gpa_search').css('display', 'none');
                             $('#name_search').css('display', 'none');
