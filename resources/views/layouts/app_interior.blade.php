@@ -113,6 +113,7 @@
         @stack('scripts')
         
         <script>
+
             $(document).ready(function() {
             
 
@@ -124,7 +125,13 @@
                     $('.main_container').css("display", "block");
                     $('.x_content').fadeIn(1100).delay(2000);
                     var wide = $('#profile_image').width() - 26;
-                    $('#image_name').width(wide);
+                    console.log(wide);
+                    if(wide == -26){
+                        $('#image_name').width($('#crop-avatar').width() - 26);
+                    }else{
+                        $('#image_name').width(wide);
+                    }
+                    
 
                     window.addEventListener('resize', function(event){
                         var wide = $('.avatar-view').width() - 26;
@@ -342,7 +349,36 @@
                     });
                     $(this.parentNode.parentNode).fadeOut( "fast" );       
                 });
-                
+
+                $('#search_select').change(function(){
+                    
+                    switch ($(this).val()) {
+                        case "gpa":
+                            $('#gpa_search').css('display', 'inline');
+                            $('#name_search').css('display', 'none');
+                            $('#grade_level_search').css('display', 'none');
+                            $('#major_search').css('display', 'none');
+                            break;
+                        case "name":
+                            $('#gpa_search').css('display', 'none');
+                            $('#name_search').css('display', 'inline');
+                            $('#grade_level_search').css('display', 'none');
+                            $('#major_search').css('display', 'none');
+                            break;
+                        case "major":
+                            $('#gpa_search').css('display', 'none');
+                            $('#name_search').css('display', 'none');
+                            $('#grade_level_search').css('display', 'none');
+                            $('#major_search').css('display', 'inline');
+                            break;
+                        case "grade_level":
+                            $('#gpa_search').css('display', 'none');
+                            $('#name_search').css('display', 'none');
+                            $('#grade_level_search').css('display', 'inline');
+                            $('#major_search').css('display', 'none');
+                            break;
+                    }
+                });
             });
         </script>
     </body>

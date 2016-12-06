@@ -262,16 +262,17 @@ class ProfileController extends Controller
 
 
     public function profileSearch(){
-        return view('profileSearch');
+        $subjects = getSubjects();
+        return view('profileSearch')->with('subjects', $subjects);
     }
 
 
 
 
     public function profileSearchResult(Request $request){
-
+        $subjects = getSubjects();
        // Session::flash('message', 'Search Executed.'."$choice with a value of $value");
-        return view('profileSearch')->with('request', $request);
+        return view('profileSearch')->with('request', $request)->with('subjects', $subjects);
 
     }
 

@@ -189,3 +189,7 @@
     text-decoration: none;
     cursor: pointer;
 }
+/*Profile Search Page*/
+#name_search, #gpa_search, #grade_level_search, #major_search{
+  display: none;
+}
