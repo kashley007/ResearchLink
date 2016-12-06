@@ -56,11 +56,12 @@ class AuthController extends Controller
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users|regex:/(.*)odu\.edu$/i',
             'password' => 'required|min:6|confirmed',
             'user_type' => 'required'
         ], [
-            'user_type.required' => 'User type is required'
+            'user_type.required' => 'User type is required',
+            'email.regex' => 'Please enter a valid ODU address'
         ]);
     }
 
@@ -68,9 +69,9 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             
-            'email' => 'required|email',
+            'email' => 'required|email|',
             'password' => 'required',
-        
+                    
         ]);
     }
     /**
