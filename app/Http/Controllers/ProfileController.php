@@ -89,14 +89,14 @@ class ProfileController extends Controller
             'city' => 'alpha',
             'zipcode' => 'numeric',
             'email' => 'email',
-            'phone' => 'numeric',
+            'phone' => 'regex:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/',
             'gpa' => 'numeric|min:0.0|max:4.0',
             'image_name' => 'image',
         ],[
             'city.alpha' => 'Please enter a valid city name',
             'zipcode.numeric' => 'Please enter a valid zip code',
             'email.email' => 'Please enter a valid email address',
-            'phone.numeric' => 'Please enter a valid phone number',
+            'phone.regex' => 'Please enter a valid phone number',
             'gpa.numeric' => 'GPA must be a valid number',
             'gpa.min' => 'GPA must be at least 0.0',
             'gpa.max' => 'GPA should be less than 4.0',
@@ -153,13 +153,13 @@ class ProfileController extends Controller
             'city' => 'alpha',
             'zipcode' => 'numeric',
             'email' => 'email',
-            'phone' => 'numeric',
+            'phone' => 'regex:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/',
             'image_name' => 'image',
         ],[
             'city.alpha' => 'Please enter a valid city name',
             'zipcode.numeric' => 'Please enter a valid zip code',
             'email.email' => 'Please enter a valid email address',
-            'phone.numeric' => 'Please enter a valid phone number',
+            'phone.regex' => 'Please enter a valid phone number',
             'image_name.image' => 'Choose a valid image file for upload'
         ]);
         if ($validator->fails()) {

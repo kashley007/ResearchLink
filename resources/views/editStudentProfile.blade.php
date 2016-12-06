@@ -152,7 +152,7 @@
                               <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="control-label col-md-3 col-sm-3 col-xs-12">Phone:</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="phone" class="form-control col-md-7 col-xs-12" name="phone" type="text" value="{{ Auth::user()->profile->phone }}">
+                                  <input id="phone" class="form-control col-md-7 col-xs-12" name="phone" type="text" value="{{ Auth::user()->profile->phone }}" data-inputmask="'mask' : '(999) 999-9999'">
                                   @if ($errors->has('phone'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>

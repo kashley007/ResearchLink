@@ -81,7 +81,7 @@
                         </li>
                       </ul>
 
-                      <a id="edit_profile" class="btn btn-success" href="{{ URL::to('/profile/student/edit') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                      <a id="edit_profile" class="btn btn-success" href="{{ URL::to('/profile/faculty/edit') }}"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                       <br />
 
 

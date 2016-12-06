@@ -1,5 +1,7 @@
 <?php
 use App\Research_Opportunity;
+use App\Profile;
+use App\User;
 //use App\Saved_Opportunity;
 //Get the total number of research opportunities available
 function totalOpportunities() {
@@ -29,7 +31,7 @@ function getAllOpportunities() {
 //Get research opportunities matched with major
 function getMatchedMajor() {
 	$major = DB::table('academic_subjects')->where('name', '=', Auth::user()->profile->major)->first();
-	$opportunities = Research_Opportunity::where('department_id', '=', $major->id)->get();	
+	$opportunities = Research_Opportunity::where('department_id', '=', $major->department_id)->get();	
 	return $opportunities;
 }
 //Get research opportunities matched with department
@@ -83,3 +85,32 @@ function getCategories(){
 	$allCategories = DB::table('categories')->get();
 	return $allCategories;
 }
+
+function notificationMatcher($value){
+
+	$users = new \Illuminate\Database\Eloquent\Collection;
+	$profiles = DB::table('interest_areas')->where([
+		['user_type', '=', 'Student'],
+		['category_id','=', $value]])->get();
+
+	foreach ($profiles as $profile) {
+		$user = User::where('id', '=', $profile->user_id)->first();
+		$users->add($user);
+	}
+	return $users;
+}
+
+
+
+//Get all Faculty Members for Lead Researcher
+function getFaculty(){
+	$faculty = Profile::where('user_type', '=', 'Faculty')->get();
+	return $faculty;
+}
+
+
+
+
+
+
+

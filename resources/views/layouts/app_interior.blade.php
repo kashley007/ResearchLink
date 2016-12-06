@@ -34,6 +34,7 @@
         <link href="{{ asset("vendors/switchery/dist/switchery.min.css") }}" rel="stylesheet">
 
 
+
         @stack('stylesheets')
 
     </head>
@@ -61,6 +62,8 @@
         <script src="{{ asset("vendors/jquery/dist/jquery.min.js")}}"></script>
         <!-- jQuery Smart Wizard -->
         <script src="{{ asset("vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js")}}"></script>
+         <!-- jquery.inputmask -->
+        <script src="{{ asset("vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js")}}"></script>
         <!-- Bootstrap -->
         <script src="{{ asset("vendors/bootstrap/dist/js/bootstrap.min.js")}}"></script>
         <!-- FastClick -->
@@ -96,6 +99,8 @@
         <!-- bootstrap-daterangepicker -->
         <script src="{{ asset("vendors/moment/min/moment.min.js")}}"></script>
         <script src="{{ asset("vendors/bootstrap-daterangepicker/daterangepicker.js")}}"></script>
+        <script type="text/javascript" src="{{ asset("vendors/bootstrap/js/transition.js") }}"></script>
+        <script type="text/javascript" src="{{ asset("vendors/bootstrap/js/collapse.js") }} "></script>
         <!-- Switchery -->
         <script src="{{ asset("vendors/switchery/dist/switchery.min.js")}}"></script>
         <!-- Custom Theme Scripts -->
@@ -150,8 +155,22 @@
                       url: '{{ url('notification/delete') }}' + '/' + dataId,
                       type: "post",
                       data: {'_token': $('input[name=_token]').val()},
-                    });      
+                    });
+                    $.get("{{ url('notification/count')}}",  
+                        function(data) {
+                            if(data.length == 0){
+                                var lead = $('#notification_count');
+                                lead.css("display", "none");
+                                
+                            }else{
+                                var lead = $('#notification_count');
+                                lead.empty();
+                                lead.append(data.length);
+                        }
+
+                    });       
                 });
+                
                 //Mark notification as read
                 $('.markRead').click(function(){ 
                 var link = $(this);
@@ -167,6 +186,19 @@
                                     $('#readReplace').fadeIn("slow");
                             });
                         }
+                    });
+                    $.get("{{ url('notification/count')}}",  
+                        function(data) {
+                            if(data.length == 0){
+                                var lead = $('#notification_count');
+                                lead.css("display", "none");
+                                
+                            }else{
+                                var lead = $('#notification_count');
+                                lead.empty();
+                                lead.append(data.length);
+                            }
+
                     });      
                 });
 
@@ -198,14 +230,117 @@
                         course.empty();
                         category.empty();
                         if("{{Auth::user()->profile->user_type == 'Faculty'}}"){
-                            course.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
-                            category.append("<option value='"+ 0 +"'>" + "Please choose a department..." + "</option>");
+                            course.append("<option value=''>" + "Please choose a department..." + "</option>");
+                            category.append("<option value=''>" + "Please choose a department..." + "</option>");
                         }else{
-                            course.append("<option value='"+ 0 +"'>" + "Please choose a major..." + "</option>");
-                            category.append("<option value='"+ 0 +"'>" + "Please choose a major..." + "</option>");
+                            course.append("<option value=' '>" + "Please choose a major..." + "</option>");
+                            category.append("<option value=' '>" + "Please choose a major..." + "</option>");
                         }
             
                     }
+                });
+                
+                $('#create_opp_filter').change(function(){
+                    if($(this).val() != 0){
+                        $.get("{{ url('createR/filterfaculty')}}", 
+                            { option: $(this).val() }, 
+                            function(data) {
+                                if(data.length == 0){
+                                    var lead = $('#user_id');
+                                    lead.empty();
+                                    lead.append("<option value=' '>" + "No faculty members found..." + "</option>");
+                                }else{
+                                    var lead = $('#user_id');
+                                    lead.empty();
+                                    lead.append("<option value=' '>" + "select..." + "</option>");
+                                    $.each(data, function(index, element) {
+                                        lead.append("<option value='"+ element.id +"'>" + element.first_name + " " + element.last_name + "</option>");
+                                    });
+                                }
+
+                        });
+                        $.get("{{ url('createR/filtercategories')}}", 
+                            { option: $(this).val() }, 
+                            function(data) {
+                               
+                                if(data.length == 0){
+                                    
+                                    var category = $('#category_id');
+                                    category.empty();
+                                    category.append("<option value=' '>" + "No categories found..." + "</option>");
+                                }else{
+                                    var category = $('#category_id');
+                                    category.empty();
+                                    category.append("<option value=' '>" + "select..." + "</option>");
+                                    $.each(data, function(index, element) {
+                                        category.append("<option value='"+ element.id +"'>" + element.name + "</option>");
+                                    });
+                                }
+                                
+                            });
+                    }else{
+                        var lead = $('#user_id');
+                        var category = $('#category_id');
+                        lead.empty();
+                        category.empty();
+                        lead.append("<option value=' '>" + "Please choose a department..." + "</option>");
+                        category.append("<option value=' '>" + "Please choose a department..." + "</option>");
+                    }
+                });
+                
+                
+                if ($('#toggle_pay').find('#checked').length) {
+                    $('#toggle_pay span').addClass( "payMe" );
+                    $('#form_pay_amount').css('display', 'inline');
+
+                }
+                $('#toggle_pay span').click(function(){
+            
+                    if ( $( this ).hasClass( "payMe" ) ) {
+                        $( this ).removeClass( "payMe");
+                        $('#form_pay_amount').css('display', 'none');
+                        $('#payment_amount').val('');
+                    }else{
+                        $( this ).addClass( "payMe");
+                        $('#form_pay_amount').css('display', 'inline');
+                    }
+                });
+
+
+                
+                $('#datetimepicker1').daterangepicker({
+                    singleDatePicker: true,
+                    singleClasses: "picker_4",
+                });
+                $('#datetimepicker2').daterangepicker({
+                    singleDatePicker: true,
+                    singleClasses: "picker_4",
+                });
+                $('#datetimepicker3').daterangepicker({
+                    singleDatePicker: true,
+                    singleClasses: "picker_4",
+                });
+                $('#datetimepicker4').daterangepicker({
+                    singleDatePicker: true,
+                    singleClasses: "picker_4",
+                });
+
+                
+    
+                //Input mask
+                $(":input").inputmask();
+
+                // Admin Delete 
+                $('.delete_opp').click(function(){
+                    var page = window.location.pathname;
+                       
+                    $.ajax({
+                        url: page,
+                        type: "POST",
+                        data: {_method: 'delete', "_token": "{{ csrf_token() }}"},
+                        
+                    });
+                    $(this.parentNode.parentNode).fadeOut( "fast" );       
                 });
                 
             });

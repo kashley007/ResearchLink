@@ -6,7 +6,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Research Opportunities</h3>
+                <h3>My Opportunities</h3>
               </div>
 
               <div class="title_right">
@@ -27,11 +27,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                      @if(Auth::user()->profile->major)
-                        <h2>{{ Auth::user()->profile->major }}</h2>
-                      @else
-                        <h2>All</h2>
-                      @endif
+                    
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -52,7 +48,6 @@
                   <div class="x_content">
                       {{ csrf_field() }}
                       <div class="row">
-                       
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                           <?php $count = 1 ?>
                         @foreach($opportunities as $opportunity)
@@ -108,7 +103,7 @@
                                       </h5>
                                       </div>
                                     </div>
-                                    <span class="profile_label">Description:</span>
+                                    <h5><span class="profile_label">Description:</span></h5>
                                     <p>{{$opportunity->description}}</p>
                                     <a class="detailLink" href="{{ URL::to('/research/'.$opportunity->id) }}">Click For More Information
                                       </a>
@@ -126,5 +121,45 @@
           </div>
         </div>
         <!-- /page content -->
+        <!--Modal -->
+        <div id="researchAlert" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">x</span>
+            <h4>Add some opportunities!</h4>
+            <p>Currently, you do not have any active research opportunities. Once they have been created, you will see them here.</p>
+          </div>
+        </div>
+        <script type="text/javascript">
+          // Get the modal
+          var modal = document.getElementById('researchAlert');
+          // Get the <span> element that closes the modal
+          var span = document.getElementsByClassName("close")[0];
+          
+          if({{ $opportunities }} == 0){
+          
+          // Add an event listener
+            document.addEventListener("emptyOpps", function(e) {
+          
+                modal.style.display = "block";
+              
+            })
+          }
+          var event = new Event('emptyOpps');
+          
+          // Dispatch/Trigger/Fire the event
+          document.dispatchEvent(event);
+          
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+          }
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+          }
+        </script>
     
 @endsection

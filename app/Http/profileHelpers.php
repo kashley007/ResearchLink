@@ -1,6 +1,7 @@
 <?php
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use App\Courses_Taken;
 use App\Courses_Taught;
 use App\Interest_Areas;
@@ -294,6 +295,7 @@ function processStudentInterestAreas($request){
             $newInterest = new Interest_Areas;
             $newInterest->user_id = $request->user()->id;
             $newInterest->category_id = $id;
+            $newInterest->user_type = Auth::user()->profile->user_type;
             $newInterest->save();
         }
     }
@@ -316,6 +318,7 @@ function processFacultyInterestAreas($request){
             $newInterest = new Interest_Areas;
             $newInterest->user_id = $request->user()->id;
             $newInterest->category_id = $id;
+            $newInterest->user_type = Auth::user()->profile->user_type;
             $newInterest->save();
         }
     }
