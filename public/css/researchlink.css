@@ -137,7 +137,7 @@
   font-weight: bold !important;
 }
 /*Edit Research Opportunity form*/
-#research_description{
+#research_description, #news_description{
   margin-bottom: 20px;
 }
   #research_description p {

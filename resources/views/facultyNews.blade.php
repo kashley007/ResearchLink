@@ -82,7 +82,7 @@
                                      </div>
                                      <h5><span class="profile_label">Description:</span></h5>
                                      <p>{{$new->description}}</p>
-                                     <a class="detailLink" href="{{ URL::to('/news/'.$new->id) }}">Click For More Information
+                                     <a class="detailLink" href="{{ URL::to('/newsFeature/'.$new->id) }}">Click For More Information
                                        </a>
                                    </div>
                                </div>

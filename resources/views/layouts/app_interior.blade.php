@@ -345,6 +345,9 @@
                         url: page,
                         type: "POST",
                         data: {_method: 'delete', "_token": "{{ csrf_token() }}"},
+                        success: function(data){
+                            window.location.replace("{{ URL::to('/research') }}");
+                        }
                         
                     });
                     $(this.parentNode.parentNode).fadeOut( "fast" );       
@@ -398,8 +401,19 @@
                     }
                 });
 
-                $('.delete_opp').click(function(){
-                    
+                $('.delete_news').click(function(){
+                    var page = window.location.pathname;
+                       
+                    $.ajax({
+                        url: page,
+                        type: "POST",
+                        data: {_method: 'delete', "_token": "{{ csrf_token() }}"},
+                        success: function(data){
+                            window.location.replace("{{ URL::to('/newsFeature') }}");
+                        }
+                        
+                    });
+                    $(this.parentNode.parentNode).fadeOut( "fast" );
                 });
             });
         </script>

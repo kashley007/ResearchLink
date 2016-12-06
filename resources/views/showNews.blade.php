@@ -53,17 +53,23 @@
                       <div class="row">
                         <div class="col-xs-12 col-sm-6">
                           @if($news->image_name)
-                                      <img src="{{URL::asset('/images/News/')}}/{{$news->image_name }}" class="img-responsive avatar-view" alt="avatar">
-                                      @endif
-                                      <h5><span class="profile_label">Title:</span>{{$news->title}}</h5>
-                                      </div>
-                                    </div>
-                                    <h5><span class="profile_label">Description:</span></h5>
-                                    <p>{{$news->description}}</p>
+                            <img src="{{URL::asset('/images/News/')}}/{{$news->image_name }}" class="img-responsive avatar-view" alt="avatar">
+                          @endif
+                          <h5><span class="profile_label">Title:</span>{{$news->title}}</h5>
+                        </div>
+                      </div>
+                      <div id="news_description" class="row">
+                        <div class="col-sm-12">
+                          <h5>
+                            <span class="profile_label">Description:
+                          </h5>
+                            <p>{{ $news->description }}</p>
+                          </div>
+                      </div>
                         @if(Auth::user()->profile->user_type == 'Faculty')
-                          <a class="btn btn-default button_design" href="{{ url('/news/' .$news->id .'/edit') }}">Edit</a>
-                          <a data-token="{{ csrf_token() }}" name="{{ $news->id }}" class="btn btn-default delete_opp button_design">Delete</a>
-                          <a class="btn btn-default button_design" href="{{ url('/news') }}">Cancel</a>
+                          <a class="btn btn-default button_design" href="{{ url('/newsFeature/' .$news->id .'/edit') }}">Edit</a>
+                          <a data-token="{{ csrf_token() }}" name="{{ $news->id }}" class="btn btn-default delete_news button_design">Delete</a>
+                          <a class="btn btn-default button_design" href="{{ url('/newsFeature') }}">Cancel</a>
                         @endif
                       </div>
                     </div>
